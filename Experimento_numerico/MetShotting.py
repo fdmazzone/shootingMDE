@@ -21,7 +21,7 @@ x“=(-sen(x)-cx') dλ + g(t,x) dμ,
 
 
 import matplotlib.pyplot as plt
-from scipy.optimize import minimize
+from scipy.optimize import minimize, differential_evolution
 import numpy as np
 from numpy.matlib import repmat
 import time
@@ -38,7 +38,7 @@ def H(t,a):
         return 0
 
 ############## BV function generating the  singular measure  ###########  
-g2=lambda t: sum(H(t,j) for j in range(1,10))
+g2=lambda t: sum((-1)**j*H(t,j) for j in range(1,10))
 g2=np.vectorize(g2)
 
 
@@ -52,8 +52,8 @@ g1=np.vectorize(g1)
 
 ##interval and parameters
 a=0.0
-b=4*np.pi
-c=1.0
+b=2*np.pi
+c=2.0
 
 ## number of  times in the discretization
 n=1000
@@ -73,8 +73,8 @@ nro_iter=100
 #################  FIEDS ##################
 
 def f2(t,x):
-    Y=np.zeros_like(x)
-    Y[1,:]=np.maximum( 1-np.sum(x,axis=0)**2,Y[0,:])
+    Y = np.zeros_like(x)
+    Y[1, :] = np.maximum(1.9-np.sqrt(np.sum(x**2, axis=0)), Y[0, :])
     return Y
 
 
@@ -85,18 +85,7 @@ def f1(t,x):
     return Y
 
 
-############  INTEGRALES  #########################
-def stieltjes_integral(f, dg):
-    result = np.cumsum(f[:,:-1].dot(np.diag(dg)),axis=1)  
-    Z=np.zeros( (len(f[:,0]) , 1) )
-    return np.concatenate((Z,result),axis=1)
-
-
-############# Integral mediante la regla del trapecio ######
-
-def trapecio_integral(f, dg):
-    result = np.cumsum(((f[:,:-1]+f[:,1:])/2).dot(np.diag(dg)),axis=1)  
-    Z=np.zeros( (len(f[:,0]) , 1) )
+### (f[:,0]) , 1) )
     return np.concatenate((Z,result),axis=1)
 
 
@@ -141,8 +130,8 @@ Error_PM_vect = np.vectorize(Error_PM)
 start_time = time.time()  # inicia reloj
 # Espezor de la Malla
 # esp=1
-x0 = np.arange(-1, 1, 0.025)  # np.arange(-np.pi,np.pi,.02)
-v0 = np.arange(-1, 1, .025)
+x0 = np.arange(-np.pi, np.pi, 0.25)  # np.arange(-np.pi,np.pi,.02)
+v0 = np.arange(-2, 2, .25)
 X0, V0 = np.meshgrid(x0, v0)
 
 if __name__ == "__main__":
@@ -171,12 +160,24 @@ print('---%s horas' %(tarda/3600))
 #fig = plt.figure()
 #ax = fig.add_axes([0.05, .1, .95, .8])
 fig,ax = plt.subplots()
-Z = error.T# (np.log(1+error.T))
-#s = ax.imshow(Z, extent=[X0[0, 0], X0[0, -1], V0[0, 0], V0[-1, 0]], origin='lower',
-    #           cmap='Greys')
-s=ax.contour(X0,V0,error,[0, .01, .1, .25, .5,.75, 1, 2], colors="k" ) 
+Z = error.T**.1
+s = ax.imshow(Z, extent=[X0[0, 0], X0[0, -1], V0[0, 0], V0[-1, 0]], origin='lower',
+               cmap='Greys')
+fig.colorbar(s, ax=ax)
+s=ax.contour(X0,V0,error.T,[0, .01, .1, .25, .5,.75, 1, 2], colors="k" ) 
 ax.clabel(s, fontsize=10)   
 
+
+Info="g2=lambda t: sum((-1)**j*H(t,j) for j in range(1,10))\n \
+     c=2.0\n\
+     def f2(t,x):\n\
+         Y = np.zeros_like(x)\n\
+         Y[1, :] = np.maximum(1.9-np.sqrt(np.sum(x**2, axis=0)), Y[0, :])\n\
+         return Y\n\
+       "
+
+f=open("DataPendAmort.npz",'wb')
+np.savez(f, X0=X0, V0=V0,error=error, Info=Info)
 
 
 
@@ -210,11 +211,12 @@ rangos=((-1,1),(-2,2))
 
 
 
-opt=minimize(Error_PM_opt,[0,0])#,bounds=rangos)
+opt=minimize(Error_PM_opt,[0.0,0.88])#,bounds=rangos)
 #opt=differential_evolution(Error_PM_opt,rangos,workers=8)
-
+    
 y0=opt["x"]
- 
+
+#y0=np.array([0,0])
 def g2b(t):
     if t<=b:
         z=g2(t)
@@ -223,7 +225,7 @@ def g2b(t):
     return z
 g2b=np.vectorize(g2b)
 
-t=np.linspace(a,2*b,10000 )
+t=np.linspace(a,3*b,10000 )
 dg2=g2b(t[1:])-g2b(t[:-1])
 dg1=g1(t[1:])-g1(t[:-1])  
 
