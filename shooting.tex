@@ -190,7 +190,7 @@ As a consequence, any solution of \eqref{eq:problema A} is also a solution of
 		\varphi(0)-\varphi(T)=0,
 	\end{array}\right. \tag{${MDE}$}
 \end{equation}
-where $f:[0,T]\times\rr^n\to\rr^{n}$ is a vector field, and
+where $f:[0,T]\times\rr^n\to\rr^{n}$ is the vector field $f=FH$, and
 $\mu$ is a positive measure. Accordingly, throughout this paper we focus our analysis on problem \eqref{eq:problema B}. Depending on the measure $\nu$, the function $f$ can be discontinuous with respect to time. This may occur despite the fact that the functions $F$ be continuous with respect to that variable. This observation shows that it is important not to assume (or to assume them in the weakest possible sense) continuity hypotheses on $f$ with respect to $t$.
 
 
@@ -622,16 +622,13 @@ Obviously, we can replace the ball in Theorem \ref{th:final} by any set that sat
 
 The equation correspond to   a damped and impulsively forced pendulum with viscosity constant to be equal to $c$. We assume that the external force is impulsive and is given by  a sum of delta measures
 $$\mu=\sum_{i=1}^{n}\alpha_i\delta_{t_i},$$
-where $D=\{t_1,\ldots,t_n\}$ is a finite subset of $[0,2\pi]$.
-
-We do not suppose that $\mu$ is a positive measure, i.e. $\alpha_i$ can be negative real numbers.
-
+where $D=\{t_1,\ldots,t_n\}$ is a finite subset of $[0,2\pi]$. We suppose that  $\alpha_i\in\mathbb{R}$, i.e.  $\mu$ can be a signed measure.
 The function $g$ will be supposed sufficiently regular. Let us remember that $\lambda$ is the Lebesgue measure.
   
  We can write equation in problem \eqref{eq:example 2.1}
 as
 $$dx=F(t,x) \, d\nu,$$
-where $\nu=\lambda+\mu$, $x=(x_1,x_2)=(\theta,\theta')$ and
+where $\nu$ is the positive measure $\nu=\lambda+\mu$, $x=(x_1,x_2)=(\theta,\theta')$ and
 $$F(t,x)=\carac{[0,T]\setminus D}(t)
     \begin{pmatrix}
      x_2\\
@@ -648,16 +645,16 @@ Here $\carac{A}$ denotes the indicator function with respect to the set $A$.
 We will take the set $K$ as 
 
 $$K=\left\{x\mid  -\pi<x_1<\pi,\; \frac{x_2^2}{2}-\cos x_1\leq 1\right\},$$
- In physical terms, $K$ is the set of states with energy less or equal than 1.
+ In physical terms, $K$ is the set of states with energy less or equal than 1, which is a closed and convex set.
 
 
- Let us show that we are within the scope of the Remark  \ref{rem:otroK}. We  take $\vec{n}=(\sin x_1,x_2)$ and $t\in [0,2\pi]$ with $\nu(\{t\})=0$, i.e.  $t\notin D$.  We consider first the damped case, that is $c>0$. In this situation,  inequality $F\cdot \vec{n}<0$ holds when $x \in \Gamma_1:=\partial K\setminus\{ (\pm\pi,0) \}$.  The set $\Gamma_2= \{ (\pm\pi,0) \}$ is trivially invariant for flow, becasuse consists of equilibrium points. In the undamped case $(c=0)$,  the set $\partial K$ is invariant. This is  an immediate consequence of an  energy preserving argument  and of the fact that $c=0$ and $g=0$ on $\partial K$. In conclusion, the hypothesis  in Remark  \ref{rem:otroK} is satisfy.
+ Let us show that we are within the scope of the Remark  \ref{rem:otroK}. We  take $\vec{n}=(\sin x_1,x_2)$ and $t\in [0,2\pi]$ with $\nu(\{t\})=0$, i.e.  $t\notin D$.  We consider first the damped case, that is $c>0$. In this situation,  inequality $F\cdot \vec{n}<0$ holds when $x \in \Gamma_1:=\partial K\setminus\{ (\pm\pi,0) \}$.  The set $\Gamma_2= \{ (\pm\pi,0) \}$ is trivially invariant for flow, because consists of equilibrium points. In the undamped case $(c=0)$,  the set $\partial K$ is invariant. This is  an immediate consequence of an  energy preserving argument  and of the fact that $c=0$ and $g=0$ on $\partial K$. In conclusion, the hypothesis  in Remark  \ref{rem:otroK} is satisfy.
 
 
 
 
 
-In order to  $F$ to satisfy \ref{eq:tele} we have to choose $g$ appropriately. For example, if $g$ satisfies that $|g(t,x)|\leq \frac{d(x,\partial K)}{M}$, where $M=\displaystyle\sup_{t\in D}\left\{\nu(\{t\})\right\}$,  then \ref{eq:tele} holds.  Under all of the above assumptions, problem \eqref{eq:problema A} has a solution.
+In order to  $F$ to satisfy \ref{eq:tele} we have to choose $g$ appropriately. For example, if $g$ satisfies that $|g(t,x)|\leq {d(x,\partial K)}/{M}$, where $M=\displaystyle\sup_{t\in D}\left\{\nu(\{t\})\right\}$,  then \ref{eq:tele} holds.  Under all of the above assumptions, problem \eqref{eq:problema A} has a solution.
 
 The shooting method can be used as an algorithm to numerically solve  periodic problems associated to MDEs. We programmed this algorithm using Python language (it can be found at \href{https://github.com/fdmazzone/shootingMDE}{https://github.com/fdmazzone/shootingMDE}). It numerically calculates Lebesgue-Stieltjes integrals and solves MDEs using Picard's successive approximation method. The convergence of this last procedure was established in \cite{P.Mazzone}. This is used to obtain the Poincaré mapping $P$.  We plot then the contour lines and desity plots  of $h(x)=\|x-P(x)\|^2$. This type of graph gives us clues about the region where it is convenient to look for a fixed point of $P$, and also, potentially, shows us all these fixed points.     Finally, the fixed point problem  $P(x)=x$ is solved using optimizations  functions of the modulus \texttt{scipy.optimize}.
 
@@ -667,20 +664,20 @@ Successive approximations are perhaps not the most efficient algorithm in order 
 
 Returning to the particular problem \eqref{eq:problema A},  we consider two experiments, which are subject to all of the above hypotheses, and therefore our theorem guarantees the existence of periodic solutions. We are interested in finding these solutions numerically and interpreting them in physical terms.
 
-\paragraph{Experiment 1: over-dampend pendulum}  We take $c=2.0$, $D=\{1,\ldots, 6\}$,
-$\mu =\sum_{j=1}^6(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, and, it is not hard to see that, $g$ verifies the inequality $|g|\leg d(x,\partial K)$. In Figure \ref{fig:mapa} the density plot of of $h(x)=\|x-P(x)\|^2$ is drawn.
+\paragraph{Experiment 1: over-damped pendulum}  We take $c=2.0$, $D=\{1,\ldots, 6\}$,
+$\mu =\sum_{j=1}^6(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, and, it is not hard to see that, $g$ verifies the inequality $|g|\leq d(x,\partial K)$. In Figure \ref{fig:mapa} the density plot of of $h(x)=\|x-P(x)\|^2$ is drawn.
 
 
  \begin{figure}[h]
  \centering
  \includegraphics[scale=.45]{Experimento_numerico/mapa_amort.png}
  % CurvasNivel.png: 640x480 px, 100dpi, 16.26x12.19 cm, bb=0 0 461 346
- \caption{Level sets of $h(x)=\|x-P(x)\|^2$. The dot marked correspond to the (presumably unique) solution.}
+ \caption{Level sets of $h(x)=\|x-P(x)\|^2$. }
  \label{fig:mapa}
 \end{figure}
  
- The density map presumably shows that there are only three periodic solutions. Two of them correspond to the unstable equilibria $x=(\pm\np.pi,0)$ of the simple pendulum. Note that the stable equilibrium $(0,0)$ of the simple pendulum is no longer an equilibrium of our equation, since the impulsive forces alter its steady state. This is not true for unstable equilibria, since $g=0$ in $\partial K$.
-  A third solution can be seen in the center of the image. Its value was determined using the optimization algorithm as approximately equal to $(-0.04,0.85)$.
+ The density map presumably shows that there are only three periodic solutions. Two of them correspond to the unstable equilibria $x=(\pm\pi,0)$ of the simple pendulum, which continue to be  equilibria of our equation . Note that the stable equilibrium $(0,0)$ of the simple pendulum is no longer an equilibrium of our equation, since the impulsive forces alter its steady state. This is not true for unstable equilibria, since $g=0$ in $\partial K$.
+  A third solution can be seen in the center of the image. Its position $(-0.04,0.85)$ was determined more accurately using the optimization algorithm.
 In the Figure \ref{fig:sol} we plot the corresponding solution. As can be see, in thios case, the mass receives impulses in opposite directions on both sides with respect to the stable equilibrium.
  
 
@@ -689,14 +686,31 @@ In the Figure \ref{fig:sol} we plot the corresponding solution. As can be see, i
  \centering
  \includegraphics[scale=.3]{Experimento_numerico/solucion_amort.png}
  % solucion.png: 640x480 px, 100dpi, 16.26x12.19 cm, bb=0 0 461 346
- \caption{Graph solution in in the interval $[0,8\pi]$ of \eqref{eq:problema A}, $\theta$ (blue) and $\theta'$ (orange)}
+ \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A}.}
  \label{fig:sol}\label{fig:sol}
 \end{figure}
 
 
 
+\paragraph{Experiment 1: undamped pendulum}  In this example, we take  $c=2.0$, $D=\{1,\ldots, 6\}$ (again) and
+$\mu =\sum_{j=1}^6\delta_j$ . The function $g$ is the same that  the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulse forces always have the same direction.
 
 
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=.3]{Experimento_numerico/mapa_no_amort.png}
+ % mapa_no_amort.png: 1440x792 px, 100dpi, 36.58x20.12 cm, bb=0 0 1037 570
+ \label{fig:mapa_no_amort}
+\end{figure}
+
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=.3]{Experimento_numerico/solucion_no_amort.png}
+ % solucion_no_amort.png: 802x480 px, 100dpi, 20.37x12.19 cm, bb=0 0 577 346
+ \label{fig:sol_no_amort}
+\end{figure}
 
 
 
