@@ -664,7 +664,9 @@ Successive approximations are perhaps not the most efficient algorithm in order 
 
 Returning to the particular problem \eqref{eq:problema A},  we consider two experiments, which are subject to all of the above hypotheses, and therefore our theorem guarantees the existence of periodic solutions. We are interested in finding these solutions numerically and interpreting them in physical terms.
 
-\paragraph{Experiment 1: over-damped pendulum}  We take $c=2.0$, $D=\{1,\ldots, 6\}$,
+\paragraph{\emph{Experiment 1: over-damped pendulum}}  
+
+We take $c=2.0$, $D=\{1,\ldots, 6\}$,
 $\mu =\sum_{j=1}^6(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, and, it is not hard to see that, $g$ verifies the inequality $|g|\leq d(x,\partial K)$. In Figure \ref{fig:mapa} the density plot of of $h(x)=\|x-P(x)\|^2$ is drawn.
 
 
@@ -692,14 +694,14 @@ In the Figure \ref{fig:sol} we plot the corresponding solution. As can be see, i
 
 
 
-\paragraph{Experiment 1: undamped pendulum}  In this example, we take  $c=2.0$, $D=\{1,\ldots, 6\}$ (again) and
-$\mu =\sum_{j=1}^6\delta_j$ . The function $g$ is the same that  the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulse forces always have the same direction.
+\paragraph{\emph{Experiment 1: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 6\}$ (again) and
+$\mu =0.5\sum_{j=1}^6\delta_j$. The function $g$ is the same that  the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulse forces always have the same direction.
 
 
 
 \begin{figure}[h]
  \centering
- \includegraphics[scale=.3]{Experimento_numerico/mapa_no_amort.png}
+ \includegraphics[scale=.2]{Experimento_numerico/mapa_no_amort.png}
  % mapa_no_amort.png: 1440x792 px, 100dpi, 36.58x20.12 cm, bb=0 0 1037 570
  \label{fig:mapa_no_amort}
 \end{figure}
