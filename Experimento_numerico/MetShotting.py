@@ -38,7 +38,7 @@ def H(t,a):
         return 0
 
 ############## BV function generating the  singular measure  ###########  
-g2=lambda t: sum((-1)**j*H(t,j) for j in range(1,10))
+g2=lambda t: .1*sum(H(t,j) for j in range(1,6))
 g2=np.vectorize(g2)
 
 
@@ -53,7 +53,7 @@ g1=np.vectorize(g1)
 ##interval and parameters
 a=0.0
 b=2*np.pi
-c=2.0
+c=0.0
 
 ## number of  times in the discretization
 n=1000
@@ -85,7 +85,18 @@ def f1(t,x):
     return Y
 
 
-### (f[:,0]) , 1) )
+############  INTEGRALES  #########################
+def stieltjes_integral(f, dg):
+    result = np.cumsum(f[:,:-1].dot(np.diag(dg)),axis=1)  
+    Z=np.zeros( (len(f[:,0]) , 1) )
+    return np.concatenate((Z,result),axis=1)
+
+
+############# Integral mediante la regla del trapecio ######
+
+def trapesio_integral(f, dg):
+    result = np.cumsum(((f[:,:-1]+f[:,1:])/2).dot(np.diag(dg)),axis=1)  
+    Z=np.zeros( (len(f[:,0]) , 1) )
     return np.concatenate((Z,result),axis=1)
 
 
@@ -130,8 +141,8 @@ Error_PM_vect = np.vectorize(Error_PM)
 start_time = time.time()  # inicia reloj
 # Espezor de la Malla
 # esp=1
-x0 = np.arange(-np.pi, np.pi, 0.25)  # np.arange(-np.pi,np.pi,.02)
-v0 = np.arange(-2, 2, .25)
+x0 = np.arange(-np.pi, np.pi, 0.1)  # np.arange(-np.pi,np.pi,.02)
+v0 = np.arange(-2, 2, .1)
 X0, V0 = np.meshgrid(x0, v0)
 
 if __name__ == "__main__":
@@ -211,7 +222,7 @@ rangos=((-1,1),(-2,2))
 
 
 
-opt=minimize(Error_PM_opt,[0.0,0.88])#,bounds=rangos)
+opt=minimize(Error_PM_opt,[0.26,0.56])#,bounds=rangos)
 #opt=differential_evolution(Error_PM_opt,rangos,workers=8)
     
 y0=opt["x"]
@@ -225,7 +236,7 @@ def g2b(t):
     return z
 g2b=np.vectorize(g2b)
 
-t=np.linspace(a,3*b,10000 )
+t=np.linspace(a,2*b,10000 )
 dg2=g2b(t[1:])-g2b(t[:-1])
 dg1=g1(t[1:])-g1(t[:-1])  
 
