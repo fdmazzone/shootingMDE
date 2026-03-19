@@ -9,6 +9,7 @@
 \ProvideTextCommandDefault{\cprime}{\tprime}
 \usepackage[pagewise,mathlines]{lineno}
 \usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\usepackage[export]{adjustbox}
 
 \usepackage{marginnote}
 \let\marginpar\marginnote
@@ -202,6 +203,9 @@ Consequently, impacts are usually represented as large forces acting over an inf
 Control theory is another source of equations with measures. 
 For example, in the optimization of the mechanics of space flights and in the movement of robots, the classic variational procedures do not allow us to find optimal controls with an impulsive character  (\cite{S.T.Zavalishchin}).
 Beyond the applications, the problems of differential equations with measures are, from a purely mathematical point of view, a natural generalization of ordinary differential equations and, in our opinion, this fact justifies their study. 
+
+
+The problem of finding periodic solutions to impulsive systems has attracted the attention of researchers. This problem has been addressed in the literature using various techniques; see, for example, \cite{Zhang-2010,Li-2014,Tian-2008,daoudi2013variational,li2020infinitely,Jingl-2013,zhang2008periodic,yang2011periodic,graef2015nontrivial,Liu-2019,heidarkhani2015infinitely}. To the best of our knowledge, this article is the first to focus on the shooting method. \comment{Revisar esto, lo acabo de agregar}
 
 
 Several integration theories have been used to deal with problems as those described before, namely Lebesgue-Stieltjes, Perron-Stieltjes, Kurzweil-Henstock integrals (see for example    \cite{S.Schwabik320,JaroslavKurzweil1411,StefanSchwabik75,EveraldoM.Bonotto420}).
@@ -664,17 +668,17 @@ Successive approximations are perhaps not the most efficient algorithm in order 
 
 Returning to the particular problem \eqref{eq:problema A},  we consider two experiments, which are subject to all of the above hypotheses, and therefore our theorem guarantees the existence of periodic solutions. We are interested in finding these solutions numerically and interpreting them in physical terms.
 
-\paragraph{\emph{Experiment 1: over-damped pendulum}}  
+\paragraph{\emph{Experiment 1: damped pendulum}}  
 
-We take $c=2.0$, $D=\{1,\ldots, 6\}$,
+We take $c=2.0$, $D=\{1,\ldots, 5\}$,
 $\mu =\sum_{j=1}^6(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, and, it is not hard to see that, $g$ verifies the inequality $|g|\leq d(x,\partial K)$. In Figure \ref{fig:mapa} the density plot of of $h(x)=\|x-P(x)\|^2$ is drawn.
 
 
  \begin{figure}[h]
  \centering
- \includegraphics[scale=.45]{Experimento_numerico/mapa_amort.png}
+ \includegraphics[max width=.8\textwidth]{Experimento_numerico/mapa_amort.png}
  % CurvasNivel.png: 640x480 px, 100dpi, 16.26x12.19 cm, bb=0 0 461 346
- \caption{Level sets of $h(x)=\|x-P(x)\|^2$. }
+ \caption{Level sets of $h(x)=\|x-P(x)\|^2$, $c=2.0$, $\mu =\sum_{j=1}^6(-1)^j\delta_j$. }
  \label{fig:mapa}
 \end{figure}
  
@@ -686,31 +690,34 @@ In the Figure \ref{fig:sol} we plot the corresponding solution. As can be see, i
 
 \begin{figure}[h]
  \centering
- \includegraphics[scale=.3]{Experimento_numerico/solucion_amort.png}
+ \includegraphics[max width=.8\textwidth]{Experimento_numerico/solucion_amort.png}
  % solucion.png: 640x480 px, 100dpi, 16.26x12.19 cm, bb=0 0 461 346
- \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A}.}
+ \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A} with  $c=2.0$, $\mu =\sum_{j=1}^6(-1)^j\delta_j$.}
  \label{fig:sol}\label{fig:sol}
 \end{figure}
 
 
 
-\paragraph{\emph{Experiment 1: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 6\}$ (again) and
+\paragraph{\emph{Experiment 1: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 5\}$ (again) and
 $\mu =0.5\sum_{j=1}^6\delta_j$. The function $g$ is the same that  the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulse forces always have the same direction.
 
 
 
 \begin{figure}[h]
  \centering
- \includegraphics[scale=.2]{Experimento_numerico/mapa_no_amort.png}
+ \includegraphics[max width=.8\textwidth]{Experimento_numerico/mapa_no_amort.png}
  % mapa_no_amort.png: 1440x792 px, 100dpi, 36.58x20.12 cm, bb=0 0 1037 570
+  \caption{Level sets of $h(x)=\|x-P(x)\|^2$, $c=0.0$, $\mu =0.5\sum_{j=1}^6\delta_j$. }
+ \label{fig:mapa}
  \label{fig:mapa_no_amort}
 \end{figure}
 
 
 \begin{figure}[h]
  \centering
- \includegraphics[scale=.3]{Experimento_numerico/solucion_no_amort.png}
+ \includegraphics[max width=.8\textwidth]{Experimento_numerico/solucion_no_amort.png}
  % solucion_no_amort.png: 802x480 px, 100dpi, 20.37x12.19 cm, bb=0 0 577 346
+ \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A} with  $c=0.0$, $\mu =0.5\sum_{j=1}^6\delta_j$..}
  \label{fig:sol_no_amort}
 \end{figure}
 
