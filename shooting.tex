@@ -158,9 +158,9 @@ The goal of this paper is to find periodic solutions of \emph{Measure Differenti
 	\left\lbrace \begin{array}{l}
 		d\varphi=F(t,\varphi(t))\;d \nu\\
 		\varphi(0)-\varphi(T)=0,
-	\end{array}\right. ,
+	\end{array}\right. 
 \end{equation}
-where $\nu:\mathscr{B}([0,T])\to \rr^m$ is a vector measure (see \cite{distel}), with finite total variation, $\mathscr{B}([0,T])$ is the $\sigma$-algebra of all Borel measurable subsets of $[0,T]$  and $F:[0,T]\times \rr^n\to \rr^{n\times m}$ is a matrix valued Carathéodory function with respecto to $\mu$, that is $F(t,x)$ is Borel measurable as function of $t$  for every $x\in \mathbb{R}^n$, and  continuous as function of $x$ for $\mu$-a.e. $t\in [0,T]$.
+where $\nu:\mathscr{B}([0,T])\to \rr^m$ is a vector measure (see \cite{distel}), with finite total variation, $\mathscr{B}([0,T])$ is the $\sigma$-algebra of all Borel measurable subsets of $[0,T]$  and $F:[0,T]\times \rr^n\to \rr^{n\times m}$ is a matrix valued Carathéodory function with respecto to $\nu$, that is $F(t,x)$ is Borel measurable as function of $t$  for every $x\in \mathbb{R}^n$, and  continuous as function of $x$ for $\mu$-a.e. $t\in [0,T]$.
 
 In what follows, we will denote by $BV([0,T],\rr^n)$ the set of all $\rr^n$-valued bounded variation functions. If  $\varphi\in BV([0,T],\rr^n)$ we denote by $\mu_\varphi$  to the Lebesgue-Stieltjes measure induced by $\varphi$ (see \cite{StanislawSaks,EdwinHewitt,folland, Evans, Carter}). When $f\in L^1([0,T],\mu_\varphi)$, as is usual, and by simplicity,  we write $\int fd\varphi$ instead of $\int fd\mu_\varphi$.
 
@@ -180,7 +180,7 @@ Many of the MDEs considered in the literature are particular instances of the MD
 \[
 d\varphi =f(t,\varphi)+g(t,\varphi)d\mu,
 \]
-where $\mu$ is a Borel real valued signed measure and $f$ and $g$ are vector-valued functions (see \cite{Brogliato}). Clearly, this equation can be viewed as a particular case of \eqref{eq:problema A}  taking $F=(f,g)$ and $\nu=(\lambda,\nu)^t$, where with $\lambda$ denotes the Lebesgue measure on $\mathbb{R}
+where $\mu$ is a Borel real valued signed measure and $f$ and $g$ are vector-valued functions (see \cite{Brogliato}). Clearly, this equation can be viewed as a particular case of \eqref{eq:problema A}  taking $F=(f,g)$ and $\nu=(\lambda,\mu)^t$, where with $\lambda$ denotes the Lebesgue measure on $\mathbb{R}
 $.
 
 The Radon–Nikodym Theorem allows us to rewrite equations involving vector measures in terms of positive measures. Let $\nu$ be a vector measure with values in $\mathbb{R}^{m}$. Then there exists a function $H \in L^{1}(\mathbb{R}^{m}, |\nu|)$ such that, for every measurable set $E \in \mathcal{A}$, the following representation holds:
@@ -245,7 +245,7 @@ Our main result is the following
  \item     There exists a ball $B(0, R)$ such that:
   \begin{enumerate}[label=\upshape($H_{\arabic{enumi}\arabic*}$),ref= ($H_{\arabic{enumi}\arabic*}$)]
 
-		\item\label{eq:lp} There exists $x^*\in\mathbb{R}^n$ such that $f(\cdot,x^*)\in L^2([0,T],d\mu)$.
+		\item\label{eq:lp} There exists $x^*\in B(0,R)$ such that $f(\cdot,x^*)\in L^2([0,T],d\mu)$.
 
         \item \label{eq:tele} For every $t \in [0,T]$ and every $x \in \overline{B(0,R)}$, we have $$x + f(t,x)\mu({t}) \in \overline{B(0,R)}.$$
 
@@ -253,7 +253,7 @@ Our main result is the following
     \end{enumerate}
   \end{enumerate}
  
- 	Then, the problem \eqref{eq:problema A} has at least a solution. 
+ 	Then, the problem \eqref{eq:problema B} has at least a solution. 
 \end{thm}
 
 
@@ -283,7 +283,7 @@ Given  a Borel measurable subset $A$ of
 If $\mu$ is a signed measure, we write  $\mu=\mu^+ -\mu^-$ for Jordan decomposition of $\mu$ and  $|\mu|$ to the \emph{total variation} of measure $\mu$, i.e. $|\mu|=\mu^+ +\mu^-$. We denote by  $\mu\perp \eta$ the fact of $\mu$ and $\eta$ are \emph{mutually singular} measures. We say  that a  measure  $\mu$ is \emph{continuous}  if 	for every $t\in \Omega$, it holds that $\mu(\{t\})=0$. We use the symbol  $\lambda$ to indicate the Lebesgue measure on $\mathbb{R}$.
 
 As we have already mentioned, the set of all bounded variation functions $\varphi:[0,T]\to \rr^n$ is denoted by
-$BV([0,T],\rr^n)$. If $\varphi\in BV([0,T],\rr^n)$, we denote by $\V(\varphi,[0,T])$ the \emph{total variation} of the function $\varphi$. As is well known, functions in $ BV([0,T],\rr^n)$ have lateral limits at every $t\in [0,T]$ and are continuous except for a set that is at most countable. We note that $\varphi$ is continuous  Given $\varphi\in BV([0,T],\rr^n)$,  There exists a unique Borel measure, which we denote  $\mu_{\varphi}$, such that  $\mu_{\varphi}([a,b))=\varphi(b^-)-\varphi(a^-)$ for every $a$ and $b$ in $[0,T]$.  This measure is called the \emph{Lebesgue-Stieltjes measure} (see \cite{folland} for details). We will usually assume that $\varphi$ is left-continuous on the left, in which case  $\mu_{\varphi}([a,b))=\varphi(b)-\varphi(a)$.
+$BV([0,T],\rr^n)$. If $\varphi\in BV([0,T],\rr^n)$, we denote by $\V(\varphi,[0,T])$ the \emph{total variation} of the function $\varphi$. As is well known, functions in $ BV([0,T],\rr^n)$ have lateral limits at every $t\in [0,T]$ and are continuous except for a set that is at most countable. We note that $\varphi$ is continuous,  there exists a unique Borel measure, which we denote  $\mu_{\varphi}$, such that  $\mu_{\varphi}([a,b))=\varphi(b^-)-\varphi(a^-)$ for every $a$ and $b$ in $[0,T]$.  This measure is called the \emph{Lebesgue-Stieltjes measure} (see \cite{folland} for details). We will usually assume that $\varphi$ is left-continuous on the left, in which case  $\mu_{\varphi}([a,b))=\varphi(b)-\varphi(a)$.
 
 The existence of local and global solutions to initial value problems for MDEs has various bibliographical antecedents. We suggest the approach developed in \cite{P.Mazzone}, where the following theorem was established. We adapt the statement to the needs of this article.
 
@@ -291,7 +291,7 @@ The existence of local and global solutions to initial value problems for MDEs h
 \begin{thm}\label{th:prop_max} Let $\mu$ be a finite measure,  $\Omega$ be an open set of $\rr\times \rr^n$ and  $(0,\alpha)\in\Omega$. Suppose that $f:\Omega\to\mathbb{R}^n$ is a locally Lipschitz function with respect to the second variable for $t\geq 0$ and  that $\varphi$ is  a  solution of \eqref{eq:pvi}
 defined in an maximal semi-open interval $[0,t_1)$.  Then, one and only one of the following assertions holds true.
 \begin{enumerate}
-\item  For every $K\Subset \Omega$ there exists $t_2\in I$  such that $(t,\varphi(t))\notin K, \forall t\in (t_2,t_1)$,
+\item  For every $K\Subset \Omega$ there exists $t_2\in [0,t_1)$  such that $(t,\varphi(t))\notin K, \forall t\in (t_2,t_1)$,
 \item There exists the limit $x_1:=\lim\limits_{t\to t_1^-}\varphi(t)$, $(t_1,x_1)\in \Omega$ and  $(t_1,x_1+f(t_1,x_1)\mu(\{t_1\}))\notin \Omega$.
 \end{enumerate}
 If $|\mu|(\{t_1\})=0$ then alternative 1 is true. Otherwise, either of the two conditions can be true.
@@ -343,7 +343,8 @@ Therefore we can conclude
 
 
 \begin{defi}\label{mu_a}
-	Let $\mu$ be a finite positive measure and let $D=\{\tau\in I \mid \mu(\{\tau\})>0\}$.
+	Let $\mu$ be a finite positive measure and let $D=\{\tau\in I \mid \mu(\{\tau\})>0\}$.\comment{El intervalo I no seria [0,T]
+}
 For any  Borel set  $A$, we define $\mu_j$ as the induced measure by $\mu$ on $D$ or \emph{jump part of } $\mu$, i.e.
 $$\mu_j(A):=\sum_{\tau\in D\cap A}\mu(\{\tau\})=\mu\left(D\cap A\right).$$
 Moreover, we introduce the continuous  measure 
@@ -650,8 +651,8 @@ $$F(t,x)=\carac{[0,T]\setminus D}(t)
 Here $\carac{A}$ denotes the indicator function with respect to the set $A$.
 
 We will take the set $K$ as 
-
-$$K=\left\{x\mid  -\pi<x_1<\pi,\; \frac{x_2^2}{2}-\cos x_1\leq 1\right\},$$
+\todoLS[]{$-\pi\leq x_1\leq \pi$ para que sea cerrado?}
+$$K=\left\{x\mid  -\pi<x_1<\pi,\; \frac{x_2^2}{2}-\cos x_1\leq 1\right\},$$ 
  In physical terms, $K$ is the set of states with energy less or equal than 1, which is a closed and convex set.
 
 
@@ -661,7 +662,7 @@ $$K=\left\{x\mid  -\pi<x_1<\pi,\; \frac{x_2^2}{2}-\cos x_1\leq 1\right\},$$
 
 
 
-In order to  $F$ to satisfy \ref{eq:tele} we have to choose $g$ appropriately. For example, if $g$ satisfies that $|g(t,x)|\leq {d(x,\partial K)}/{M}$, where $M=\displaystyle\sup_{t\in D}\left\{\nu(\{t\})\right\}$,  then \ref{eq:tele} holds.  Under all of the above assumptions, problem \eqref{eq:problema A} has a solution.
+In order to  $F$ to satisfy \ref{eq:tele} we have to choose $g$ appropriately. For example, if $g$ satisfies that $|g(t,x)|\leq {d(x,\partial K)}/{M}$, where $M=\displaystyle\sup_{t\in D}\left\{\nu(\{t\})\right\}$,  then \ref{eq:tele} holds.  Under all of the above assumptions, problem \eqref{eq:problema A}\todoLS[]{seria el problema \eqref{eq:problema B}} has a solution.
 
 The shooting method can be used as an algorithm to numerically solve  periodic problems associated to MDEs. We programmed this algorithm using Python language (it can be found at \href{https://github.com/fdmazzone/shootingMDE}{https://github.com/fdmazzone/shootingMDE}). It numerically calculates Lebesgue-Stieltjes integrals and solves MDEs using Picard's successive approximation method. The convergence of this last procedure was established in \cite{P.Mazzone}. This is used to obtain the Poincaré mapping $P$.  We plot then the contour lines and desity plots  of $h(x)=\|x-P(x)\|^2$. This type of graph gives us clues about the region where it is convenient to look for a fixed point of $P$, and also, potentially, shows us all these fixed points.     Finally, the fixed point problem  $P(x)=x$ is solved using optimizations  functions of the modulus \texttt{scipy.optimize}.
 
@@ -669,11 +670,11 @@ Successive approximations are perhaps not the most efficient algorithm in order 
 
 
 
-Returning to the particular problem \eqref{eq:problema A},  we consider two experiments, which are subject to all of the above hypotheses, and therefore our theorem guarantees the existence of periodic solutions. We are interested in finding these solutions numerically and interpreting them in physical terms.
+Returning to the particular problem \eqref{eq:problema A}\todoLS[]{problem \eqref{eq:problema B}},  we consider two experiments, which are subject to all of the above hypotheses, and therefore our theorem guarantees the existence of periodic solutions. We are interested in finding these solutions numerically and interpreting them in physical terms.
 
 \paragraph{\emph{Experiment 1: damped pendulum}}  
 
-We take $c=2.0$, $D=\{1,\ldots, 5\}$,
+We take $c=2.0$, $D=\{1,\ldots, 5\}$,\todoLS[]{el conjunto $D$ tiene 5 discontinuidades y la medida $\mu$ 6.}
 $\mu =\sum_{j=1}^6(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, and, it is not hard to see that, $g$ verifies the inequality $|g|\leq d(x,\partial K)$. In Figure \ref{fig:mapa} the density plot of of $h(x)=\|x-P(x)\|^2$ is drawn.
 
 
@@ -691,17 +692,17 @@ In the Figure \ref{fig:sol} we plot the corresponding solution. As can be see, i
  
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
  \centering
  \includegraphics[max width=.8\textwidth]{Experimento_numerico/solucion_amort.png}
  % solucion.png: 640x480 px, 100dpi, 16.26x12.19 cm, bb=0 0 461 346
- \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A} with  $c=2.0$, $\mu =\sum_{j=1}^6(-1)^j\delta_j$.}
+ \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A} with  $c=2.0$, $\mu =\sum_{j=1}^6(-1)^j\delta_j$.\todoLS[]{yo le veo más discontinuidades, 12 para ser exacto}}
  \label{fig:sol}\label{fig:sol}
 \end{figure}
 
 
 
-\paragraph{\emph{Experiment 1: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 5\}$ (again) and
+\paragraph{\emph{Experiment 2: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 5\}$ (again) and
 $\mu =0.5\sum_{j=1}^6\delta_j$. The function $g$ is the same that  the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulse forces always have the same direction.
 
 
