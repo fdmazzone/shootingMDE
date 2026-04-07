@@ -686,8 +686,9 @@ $\mu =\sum_{j=1}^5(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, 
  
  The density map presumably shows that there are only three periodic solutions. Two of them correspond to the unstable equilibria $x=(\pm\pi,0)$ of the simple pendulum, which continue to be  equilibria of our equation. Note that the stable equilibrium $(0,0)$ of the simple pendulum is no longer an equilibrium of our equation, since the impulsive forces alter its steady state. This is not true for unstable equilibria, since $g=0$ in $\partial K$.
   A third solution can be seen in the center of the image. Its position $(-0.04,0.85)$ was determined more accurately using the optimization algorithm.
-In Figure \ref{fig:sol}, we plot the corresponding solution. As can be seen, in this case, \textcolor{blue}{the mass maintains negative angles for most of its motion.}
-\todoSA[inline]{La IA sugiere la siguiente redacción: in this case, the mass spends most of its motion at negative angles.}
+In Figure \ref{fig:sol}, we plot the corresponding solution. \textcolor{blue}{sAs can be observed, in this case, the mass
+spends most of its motion at negative angles. This is because the initial impulse is negative; if it were positive, the mass would spend most of its time at positive angles.}\todoLS[]{programe la solución y efectivamente si $\mu =\sum_{j=1}^5(-1)^{j+1}\delta_j$ la solución se refleja con respecto al eje $x$.}
+
 
 \begin{figure}[h!]
  \centering
@@ -701,7 +702,11 @@ In Figure \ref{fig:sol}, we plot the corresponding solution. As can be seen, in 
 
 \paragraph{\emph{Experiment 2: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 5\}$ (again) and
 $\mu =0.5\sum_{j=1}^5\delta_j$. The function $g$ is the same as in the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulsive forces always act in the same direction. \textcolor{blue}{In Figure \ref{fig:mapa_no_amort} the density plot of  $h(x)=\|x-P(x)\|^2$ is drawn.}
-\textcolor{blue}{The map clearly shows the compact region $K$ and a solution within it. The unstable solutions $(\pi,0)$ and $(-\pi,0)$ are on the edge of $K$ where the pendulum behaves like a simple pendulum. As in the previous example, the stable equilibrium (0,0) of the simple pendulum is no longer an equilibrium of our equation. The stable equilibrium is observed at $P=(1,338 ; 0,578)$,  obtained through an optimization algorithm, and its graph is shown in Figure \ref{fig:sol_no_amort}.}
+\textcolor{blue}{The map clearly shows the compact region $K$ and the solutions to the equation $h(x)=0$. 
+The unstable solutions $(\pi,0)$ and $(-\pi,0)$ lie on the border of $K$, where the pendulum behaves like a simple pendulum because the external force $g$ vanishes on the border of $K$. 
+As in the previous example, the stable equilibrium $(0,0)$ of the simple pendulum is no longer an equilibrium of our equation. 
+We observe a solution of $h(x)=0$ inside $K$, at the point $P = (1.338,\, 0.578)$, which corresponds to the periodic solution we were looking for, obtained through an optimization algorithm. 
+Its graph is shown in Figure~\ref{fig:sol_no_amort}.}
 
 
 
