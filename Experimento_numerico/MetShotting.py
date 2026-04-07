@@ -38,7 +38,7 @@ def H(t,a):
         return 0
 
 ############## BV function generating the  singular measure  ###########  
-g2=lambda t: .1*sum(H(t,j) for j in range(1,6))
+g2=lambda t: .5*sum(H(t,j) for j in range(1,6))
 g2=np.vectorize(g2)
 
 
@@ -163,10 +163,10 @@ print('---%s horas' %(tarda/3600))
 
 #ax.set_aspect(aspect=1.5)
 #fig.colorbar(s, ax=ax)
-# A = np.load("ExperimentoMedidasE2.npz")
-# X0 = A["X0"]
-# V0 = A["V0"]
-# error = A["error"]
+A = np.load("ExperimentoMedidasE2.npz")
+X0 = A["X0"]
+V0 = A["V0"]
+error = A["error"]
 
 #fig = plt.figure()
 #ax = fig.add_axes([0.05, .1, .95, .8])
@@ -175,7 +175,7 @@ Z = error.T**.1
 s = ax.imshow(Z, extent=[X0[0, 0], X0[0, -1], V0[0, 0], V0[-1, 0]], origin='lower',
                cmap='Greys')
 fig.colorbar(s, ax=ax)
-s=ax.contour(X0,V0,error.T,[0, .01, .1, .25, .5,.75, 1, 2], colors="k" ) 
+s=ax.contour(X0,V0,error.T,[0, .01, .1, .25, .5,.75, 1, 2], colors="b" ) 
 ax.clabel(s, fontsize=10)   
 
 
@@ -205,7 +205,7 @@ np.savez(f, X0=X0, V0=V0,error=error, Info=Info)
 
 def Error_PM_opt(x):
     return np.sum((PoincareMap(x)-x)**2)
-rangos=((-1,1),(-2,2))
+rangos=((1,1.6),(.2,.8))
 
 
 
@@ -222,7 +222,7 @@ rangos=((-1,1),(-2,2))
 
 
 
-opt=minimize(Error_PM_opt,[0.26,0.56])#,bounds=rangos)
+opt=minimize(Error_PM_opt,[1.3,0.56])#,bounds=rangos)
 #opt=differential_evolution(Error_PM_opt,rangos,workers=8)
     
 y0=opt["x"]
