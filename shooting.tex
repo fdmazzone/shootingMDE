@@ -140,11 +140,13 @@ In this paper, we investigate the existence of periodic solutions for systems of
 
 
     \maketitle
+
     \markboth { {Periodic Solutions to MDE  }}
         { L. Sierra, F. Mazzone and S. Acinas}
         \noindent\emph{Keywords and Phrases:}   Measure, Equations, Shooting, Periodic.
         
        \noindent\emph{2020 Mathematical Subject Classification:  Primary 34B37. Secondary  34A36, 34A37 and  34A38.}
+
 
 %===============================================================================================
 %==========================SECTION 1: INTRODUCTION==============================================
@@ -162,6 +164,7 @@ The goal of this paper is to establish the existence of periodic solutions to \e
 \end{equation}
 where $\nu:\mathscr{B}([0,T])\to \rr^m$ is a vector measure (see \cite{distel}) with finite total variation, $\mathscr{B}([0,T])$ is the $\sigma$-algebra of all Borel measurable subsets of $[0,T]$, and $F:[0,T]\times \rr^n\to \rr^{n\times m}$ is a matrix-valued Carathéodory function with respect to $\nu$. That is, $F(t,x)$ is Borel measurable as a function of $t$ for every $x\in \mathbb{R}^{n\times m}$, and continuous as a function of $x$ for $|\nu|$-a.e. $t\in [0,T]$.
 
+
 In what follows, we denote by $BV([0,T],\rr^n)$ the set of all $\rr^n$-valued functions of bounded variation. If $\varphi\in BV([0,T],\rr^n)$, we denote by $\mu_\varphi$ the Lebesgue--Stieltjes measure induced by $\varphi$ (see \cite{StanislawSaks,EdwinHewitt,folland, Evans, Carter}). Whenever $f\in L^1([0,T],\mu_\varphi)$, for simplicity we write $\int f\, d\varphi$ instead of $\int f\, d\mu_\varphi$.
 
 In the literature, several notions of solutions for MDEs have been proposed, which in some cases lead to non-equivalent results for the same equation (see \cite{S.T.Zavalishchin}). In this paper, we adopt the definition introduced in \cite{P.Mazzone}.
@@ -176,7 +179,8 @@ Many of the MDEs considered in the literature are particular instances of \eqref
 \[
 d\varphi =f(t,\varphi)+g(t,\varphi)d\mu,
 \]
-where $\mu$ is a real-valued signed Borel measure and $f$ and $g$ are vector-valued functions (see \cite{Brogliato}). Clearly, this equation can be viewed as a particular case of \eqref{eq:problema A} by taking $F=(f,g)$ and $\nu=(\lambda,\mu)^t$, where $\lambda$ denotes the Lebesgue measure on $\mathbb{R}$.
+ where $\mu$ is a real-valued signed Borel measure and $f$ and $g$ are vector-valued functions (see \cite{Brogliato}). Clearly, this equation can be viewed as a particular case of \eqref{eq:problema A} by taking $F=(f,g)$ and $\nu=(\lambda,\mu)^t$, where $\lambda$ denotes the Lebesgue measure on $\mathbb{R}$.
+ 
 
 The Radon--Nikodym theorem allows us to rewrite equations involving vector measures in terms of positive measures. Let $\nu$ be a vector measure with values in $\mathbb{R}^{m}$. Then there exists a function $H \in L^{1}(|\nu|;\mathbb{R}^{m})$ such that, for every measurable set $E$, the following representation holds:
 \[
@@ -229,8 +233,8 @@ Our main result is the following
     \item \label{eq:tran} For every $t \in [0,T]$ with $\mu(\{t\}) = 0$ and every $x$ such that $|x| = R$, we have $f(t, x) \cdot x < 0$.
     \end{enumerate}
   \end{enumerate}
- 
  	Then, problem \eqref{eq:problema B} has at least one solution. 
+ 
 \end{thm}
 
 
@@ -248,11 +252,13 @@ We use the dot product on $\rr^n$ defined by $x\cdot y=x_1y_1 + \cdots + x_ny_n$
 The set of all continuous functions $f:[0,T]\to \rr^n$ will be denoted by $C([0,T],\rr^n)$, or simply $C([0,T])$ when the codomain is $\rr$.    
 
 We briefly introduce some notation related to measure theory; we refer to \cite{StanislawSaks,EdwinHewitt,folland, Evans, Carter} for further details on the material presented in this section.
-
+ 
 Given a Borel measurable subset $A$ of $\rr$, we denote by $\mathscr{B}(A)$ the $\sigma$-algebra of all Borel subsets of $A$. If $\mu$ is a signed measure, we write $\mu=\mu^+ -\mu^-$ for the Jordan decomposition of $\mu$, and $|\mu|$ for the \emph{total variation} of $\mu$, that is, $|\mu|=\mu^+ +\mu^-$. We write $\mu\perp \eta$ to indicate that $\mu$ and $\eta$ are \emph{mutually singular} measures. We say that a measure $\mu$ is \emph{continuous} if, for every $t\in \Omega$, it holds that $\mu(\{t\})=0$. We use the symbol $\lambda$ to denote the Lebesgue measure on $\mathbb{R}$.
+ 
 
 As mentioned above, the set of all functions of bounded variation $\varphi:[0,T]\to \rr^n$ is denoted by $BV([0,T],\rr^n)$. If $\varphi\in BV([0,T],\rr^n)$, we denote by $\V(\varphi,[0,T])$ the \emph{total variation} of $\varphi$. As is well known, functions in $BV([0,T],\rr^n)$ have one-sided limits at every $t\in [0,T]$ and are continuous except at a set that is at most countable. If $\varphi\in BV([0,T],\rr^n)$, then there exists a unique Borel measure, denoted by $\mu_{\varphi}$, such that $\mu_{\varphi}([a,b))=\varphi(b^-)-\varphi(a^-)$ for every $a$ and $b$ in $[0,T]$. This measure is called the \emph{Lebesgue--Stieltjes measure induced by $\varphi$} (see \cite{folland} for details). We will usually assume that $\varphi$ is left-continuous, in which case $\mu_{\varphi}([a,b))=\varphi(b)-\varphi(a)$.
 
+ 
 The existence of local and global solutions to initial value problems for MDEs has been studied extensively in the literature. We refer, in particular, to the approach developed in \cite{P.Mazzone}, where the following theorem is established. We adapt its statement to suit the needs of this article.
 
 \begin{thm}\label{th:prop_max} Let $\mu$ be a finite measure, $\Omega$ be an open set of $\rr\times \rr^n$, and $(0,\alpha)\in\Omega$. Suppose that $f:\Omega\to\mathbb{R}^n$ is locally Lipschitz with respect to the second variable for $t\geq 0$, and that $\varphi$ is a solution of \eqref{eq:pvi} defined on a maximal half-open interval $[0,t_1)$. Then exactly one of the following assertions holds:
@@ -288,7 +294,9 @@ then $u(t)\leq ce^{\mu([0,t))}$.
  \end{split}
 \end{equation*}
 
+ 
 Then, using the integration by parts formula (see \cite[Th. 14.1]{StanislawSaks}) and taking into account the continuity of $F\circ h$, we have  
+ 
 \begin{equation*}
 \begin{split}
 	0\leq &\int_{[0,t)}F(h(r))\; dw+  \int_{[0,t)}w(r)\; \mu_{F\circ h}=
@@ -297,8 +305,10 @@ Then, using the integration by parts formula (see \cite[Th. 14.1]{StanislawSaks}
     \end{split}
 \end{equation*}
 %
+ 
 Therefore, we conclude
  $$u(t)\leq w(t)\leq c\exp\left( \mu([0,t))\right).$$
+ 
 %
 \end{proof}
 
@@ -306,7 +316,9 @@ Therefore, we conclude
 
 \begin{defi}\label{mu_a}
 	Let $\mu$ be a finite positive measure and let $D=\{\tau\in [0,T] \mid \mu(\{\tau\})>0\}$.
+ 
 For any Borel set $A$, we define the \emph{jump part of} $\mu$ as the measure $\mu_j$ induced by $\mu$ on $D$, that is,
+ 
 $$\mu_j(A):=\sum_{\tau\in D\cap A}\mu(\{\tau\})=\mu\left(D\cap A\right).$$
 Moreover, we introduce the continuous measure 
 $$\bar{\mu}\left(A\right):=\mu(A)-\mu_j\left(A \right)=\mu\left(A\setminus D \right).$$
@@ -335,14 +347,16 @@ We fix $\epsilon>0$. By the absolute continuity of the integral, there exists $\
 
 We define $w(t)=c+\int_{[0,t)}u(s)\;d\mu$. Fix an arbitrary $t\in [0,T)$. Since $D$ is countable, we may assume that $D\cap[0,t)=\left\lbrace t_n\right\rbrace _{n=1}^\infty$. In addition, since
 
+ 
 \begin{equation}\sum_{n=1}^\infty\mu(\{t_n\})=\mu(D\cap[0,t))<\infty,\label{eq:4.1},
 \end{equation}
 there exists $N\in\nn$ such that
+ 
 
 \begin{equation}\label{eq:sum_disc}
 \sum_{n=N+1}^{\infty}\mu(\{t_n\})\leq \delta.
 \end{equation}
-
+ 
 Let $\{s_1,\ldots,s_N\}$ be an increasing reordering of the set $D_\delta:=\{t_1,\ldots, t_N\}$. Additionally, we set $s_{N+1}=t$.
 
 Decomposing the integral and using the inequality $u\leq w$, we obtain
@@ -497,10 +511,18 @@ If  we suppose that $A$ is not open relative to $[0,T]$, then  there would be $ 
  
  $$ |\varphi_\alpha(s)-\varphi_\alpha(t_0)|<\frac{\beta}{3L}\quad \text{ and }\quad |f(s,\varphi_\alpha(t_0))-f(t_0,\varphi_\alpha(t_0))|\leq \frac{\beta}{3}.   $$ 
    
+<<<<<<< HEAD
  
+=======
+>>>>>>> 25dacc9b44f021ef3d0e815be6509532bdc5970b
  
  Therefore, using the Lipschitz condition on $f$,
  
+<<<<<<< HEAD
+=======
+ Therefore, using the Lipschitz condition on $f$,
+ 
+>>>>>>> 25dacc9b44f021ef3d0e815be6509532bdc5970b
 % \begin{multline*}
 \[\begin{split}
       \left[ \varphi_\alpha(t)-\varphi_\alpha(t_0) \right] \cdot \frac{\varphi_\alpha(t_0)}{|\varphi_\alpha(t_0)|} &\leq \int_{[t_0,t)}\left|f(s,\varphi_\alpha(s))-f(s,\varphi_\alpha(t_0))\right|\; d\mu\\  &+ \int_{[t_0,t)}\left|f(s,\varphi_\alpha(t_0))-f(t_0,\varphi_\alpha(t_0))\right| \; d\mu \\ &+ \int_{[t_0,t)}f(t_0,\varphi_\alpha(t_0))\cdot \frac{\varphi_\alpha(t_0)}{\,|\varphi_\alpha(t_0)|}\; d\mu
