@@ -326,7 +326,7 @@ In other words, in the terminology of Ambrosio et al. (see \cite{LuigiAmbrosio15
 \end{defi}
 
 
-\begin{thm}[\textbf{Generalized Gronwall Inequality}] \label{TG} 	Let $\mu$ be a finite, positive measure. If $u\in L^1(\mu)$ satisfies  
+\begin{thm}[\textbf{Generalized Gronwall Inequality}] \label{TG} 	Let $\mu$ be a finite, positive measure. If $u\in L^1(\mu)$, $u\geq 0$ and it satisfies
 	\begin{equation*}
 		u(t)\leq c+\int_{[0,t)}u(r) \; d\mu, 
 	\end{equation*} 
@@ -375,7 +375,7 @@ By an inductive argument, and then using  that $\mu=\bar{\mu}$ on $[0,t)\setminu
 \begin{multline*}
 	w(t)\leq cK(t)+ K(t)\int_{[0,t)-\{t_1,\cdots ,t_N\}}u(s)\;d\mu\\
 	= cK(t)+
-	K(t)\int_{[0,t)\setminus D} u(s) d\;\mu + K(t)\int_{D\setminus\{t_1,\cdots ,t_N\}}u(s)\;d\mu\\
+	K(t)\int_{[0,t)\setminus D} u(s) \;d\mu + K(t)\int_{D\setminus\{t_1,\cdots ,t_N\}}u(s)\;d\mu\\
 	\leq cK(t)+ K(t)\int_{[0,t)\setminus D} u(s) d\;\bar{\mu} +K(t) \epsilon\\
 	=cK(t)+ K(t)\epsilon+K(t)\int_{[0,t)}u(s)\;d\bar{\mu}+\epsilon .
 \end{multline*}
