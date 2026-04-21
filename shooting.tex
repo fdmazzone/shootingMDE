@@ -40,6 +40,7 @@
 \usepackage{changes}
 %\usepackage{soul}
 \usepackage{empheq}
+\usepackage{float}
 %\definechangesauthor[name=Fer, color=blue]{Fer}
 %%%%%%%%%%%%%%% Paquete para el codigo python
 
@@ -105,8 +106,8 @@
 
 
 
-                \title{Existence of Periodic Solutions to Equations with Measures by Shooting Method}
-\todoSA { Habr\'a que ver si queda as\'i...}
+                \title{Existence of Periodic Solutions to Equations with Measures via the  Shooting Method}
+
 								
 
                 \author{ Lorenzo Sierra$^1$ , Fernando Mazzone$^2$ and  Sonia Acinas$^3$ }
@@ -128,62 +129,56 @@ Universidad Nacional de La Pampa
 Av. Uruguay 251 (L6300CLB) Santa Rosa, La Pampa, Argentina}
         \email{sonia.acinas@gmail.com}
 				
-				 \thanks{This paper was supported by....}
+\thanks{   The research has been supported by SECyT-UNRC, grant C561 and FCEyN-UNLPam, grant PI 91. M.}
+
+ 
 
 %====================================================================
 \begin{abstract}
-RESUMEN!
+In this paper, we investigate the existence of periodic solutions for systems of measure differential equations (MDEs). Our approach is based on the shooting method, which allows us to establish a theoretical result guaranteeing the existence of solutions to the problem under consideration. Moreover, the shooting method serves as a robust tool for the numerical approximation of such systems. In the final section, we apply this approach to demonstrate the existence of periodic solutions for a forced pendulum subject to impulsive forces. Additionally, we present a computational implementation to obtain approximate solutions.
 \end{abstract}
 
 
     \maketitle
-    \markboth { \tiny{Periodic Solutions to MDE through  Shooting Method}}
-        { Lorenzo Sierra, Fernando Mazzone and Sonia Acinas}
-        \noindent{Keywords and Phrases.}
-        \\ 
-				
-        {\it Periodic solutions,  Equations with measures, Critical point, Shooting Method \todoSA{ Chequear, quitar o agregar!}}
-
-       \noindent{2010 {\it Mathematical Subject Classification.}}\\
-        Primary AAAA. Secondary  BBBB, CCCC. \todoSA{ Buscar!}
+    \markboth { {Periodic Solutions to MDE  }}
+        { L. Sierra, F. Mazzone and S. Acinas}
+        \noindent\emph{Keywords and Phrases:}   Measure, Equations, Shooting, Periodic.
+        
+       \noindent\emph{2020 Mathematical Subject Classification:  Primary 34B37. Secondary  34A36, 34A37 and  34A38.}
 
 %===============================================================================================
 %==========================SECTION 1: INTRODUCTION==============================================
-\section{Introduction and Main  Theorem}
 
-The goal of this paper is to find periodic solutions of \emph{Measure Differential Equations} (briefly,  MDE). More specifically, we are looking for solutions of the following bounday value problem
 
+\section{Introduction and Main Theorem}
+
+The goal of this paper is to establish the existence of periodic solutions to \emph{Measure Differential Equations} (briefly, MDEs). More specifically, we seek solutions to the following boundary value problem
 
 \begin{equation} \label{eq:problema A}
 	\left\lbrace \begin{array}{l}
 		d\varphi=F(t,\varphi(t))\;d \nu\\
 		\varphi(0)-\varphi(T)=0,
-	\end{array}\right. ,
+	\end{array}\right.
 \end{equation}
-where $\nu:\mathscr{B}([0,T])\to \rr^m$ is a vector measure (see \cite{distel}), with finite total variation, $\mathscr{B}([0,T])$ is the $\sigma$-algebra of all Borel measurable subsets of $[0,T]$  and $F:[0,T]\times \rr^n\to \rr^{n\times m}$ is a matrix valued Carathéodory function with respecto to $\mu$, that is $F(t,x)$ is Borel measurable as function of $t$  for every $x\in \mathbb{R}^n$, and  continuous as function of $x$ for $\mu$-a.e. $t\in [0,T]$.
+where $\nu:\mathscr{B}([0,T])\to \rr^m$ is a vector measure (see \cite{distel}) with finite total variation, $\mathscr{B}([0,T])$ is the $\sigma$-algebra of all Borel measurable subsets of $[0,T]$, and $F:[0,T]\times \rr^n\to \rr^{n\times m}$ is a matrix-valued Carathéodory function with respect to $\nu$. That is, $F(t,x)$ is Borel measurable as a function of $t$ for every $x\in \mathbb{R}^{n\times m}$, and continuous as a function of $x$ for $|\nu|$-a.e. $t\in [0,T]$.
 
-In what follows, we will denote by $BV([0,T],\rr^n)$ the set of all $\rr^n$-valued bounded variation functions. If  $\varphi\in BV([0,T],\rr^n)$ we denote by $\mu_\varphi$  to the Lebesgue-Stieltjes measure induced by $\varphi$ (see \cite{StanislawSaks,EdwinHewitt,folland, Evans, Carter}). When $f\in L^1([0,T],\mu_\varphi)$, as is usual, and by simplicity,  we write $\int fd\varphi$ instead of $\int fd\mu_\varphi$.
+In what follows, we denote by $BV([0,T],\rr^n)$ the set of all $\rr^n$-valued functions of bounded variation. If $\varphi\in BV([0,T],\rr^n)$, we denote by $\mu_\varphi$ the Lebesgue--Stieltjes measure induced by $\varphi$ (see \cite{StanislawSaks,EdwinHewitt,folland, Evans, Carter}). Whenever $f\in L^1([0,T],\mu_\varphi)$, for simplicity we write $\int f\, d\varphi$ instead of $\int f\, d\mu_\varphi$.
 
-
-
-In the literature it has been proposed several concepts of solutions of MDEs, which leads in some cases to non equivalent results for a same equation, see \cite{S.T.Zavalishchin}. In this paper we adopt the definition studied in \cite{P.Mazzone}.
-
-
+In the literature, several notions of solutions for MDEs have been proposed, which in some cases lead to non-equivalent results for the same equation (see \cite{S.T.Zavalishchin}). In this paper, we adopt the definition introduced in \cite{P.Mazzone}.
 \begin{defi}[see \cite{P.Mazzone}]\label{def-sol}  We say that
-	$\varphi \in BV([0,T],\rr^n)$  is a solution of the  MDE $d\varphi=F(t,\varphi(t))\;d \nu$ if   for every $t\in [0,T]$,  $\varphi(t)$ is left-continuous and for every Borel measurable set $A$ holds
+	$\varphi \in BV([0,T],\rr^n)$ is a solution of $d\varphi=F(t,\varphi(t))\;d \nu$ if, for every $t\in [0,T]$, $\varphi(t)$ is left-continuous and, for every Borel measurable set $A$, the following holds:
 \begin{equation}\label{eq:9}
     \int_{A}d\varphi=\int_{A}F(s,\varphi(s))\; d\nu.
 \end{equation}
 \end{defi}
 
-Many of the MDEs considered in the literature are particular instances of the MDE \eqref{eq:problema A}. For example, it is common to find systems of MDEs presented in the form
+Many of the MDEs considered in the literature are particular instances of \eqref{eq:problema A}. For example, it is common to encounter systems of MDEs written in the form
 \[
 d\varphi =f(t,\varphi)+g(t,\varphi)d\mu,
 \]
-where $\mu$ is a Borel real valued signed measure and $f$ and $g$ are vector-valued functions (see \cite{Brogliato}). Clearly, this equation can be viewed as a particular case of \eqref{eq:problema A}  taking $F=(f,g)$ and $\nu=(\lambda,\nu)^t$, where with $\lambda$ denotes the Lebesgue measure on $\mathbb{R}
-$.
+where $\mu$ is a real-valued signed Borel measure and $f$ and $g$ are vector-valued functions (see \cite{Brogliato}). Clearly, this equation can be viewed as a particular case of \eqref{eq:problema A} by taking $F=(f,g)$ and $\nu=(\lambda,\mu)^t$, where $\lambda$ denotes the Lebesgue measure on $\mathbb{R}$.
 
-The Radon–Nikodym Theorem allows us to rewrite equations involving vector measures in terms of positive measures. Let $\nu$ be a vector measure with values in $\mathbb{R}^{m}$. Then there exists a function $H \in L^{1}(\mathbb{R}^{m}, |\nu|)$ such that, for every measurable set $E \in \mathcal{A}$, the following representation holds:
+The Radon--Nikodym theorem allows us to rewrite equations involving vector measures in terms of positive measures. Let $\nu$ be a vector measure with values in $\mathbb{R}^{m}$. Then there exists a function $H \in L^{1}(|\nu|;\mathbb{R}^{m})$ such that, for every measurable set $E$, the following representation holds:
 \[
 \nu(E) = \int_{E} H(s) \, d|\nu|.
 \]
@@ -194,120 +189,89 @@ As a consequence, any solution of \eqref{eq:problema A} is also a solution of
 		\varphi(0)-\varphi(T)=0,
 	\end{array}\right. \tag{${MDE}$}
 \end{equation}
-where $f:[0,T]\times\rr^n\to\rr^{n}$ is the vector field $f=FH$, and
-$\mu$ is a positive measure. Accordingly, throughout this paper we focus our analysis on problem \eqref{eq:problema B}. Depending on the measure $\nu$, the function $f$ can be discontinuous with respect to time. This may occur despite the fact that the functions $F$ be continuous with respect to that variable. This observation shows that it is important not to assume (or to assume them in the weakest possible sense) continuity hypotheses on $f$ with respect to $t$.
+where $f:[0,T]\times\rr^n\to\rr^{n}$ is the vector field defined by $f=FH$, and $\mu$ is a positive measure. Accordingly, throughout this paper we focus our analysis on problem \eqref{eq:problema B}. Depending on the measure $\nu$, the function $f$ may be discontinuous with respect to time, even if $F$ is continuous with respect to that variable. This observation highlights the importance of not imposing, or imposing only in the weakest possible sense, continuity assumptions on $f$ with respect to $t$.
+ 
+MDEs appear in nonsmooth models across several branches of science, ranging from the motion of molecules in ideal gases to the dynamics of impacts between a ball and a racket. In physics and mechanical engineering, MDEs arise in the study of granular matter and sandpiles; in robotics, they are used to model impacts at joints (see \cite{Brogliato} and \cite{ALeonov}). A particular case in which MDEs arise is given by impulsive models; see \cite{Bainov,Bainov_2,Lakshmikan}.
 
+For example, in mechanical systems, the impact between two bodies can be regarded as a short-duration phenomenon that produces a sudden change in the system dynamics. Consequently, impacts are usually represented as large forces acting over an infinitesimally short time interval. Control theory provides another source of equations involving measures. For instance, in the optimization of space flight mechanics and in robotic motion, classical variational methods do not allow one to obtain optimal controls with an impulsive character (see \cite{S.T.Zavalishchin}).
 
-MDEs appear in nonsmooth models across several branches of science, ranging from the movement of molecules in ideal gases to the dynamics of impacts between a ball and a racket.
-In physics and mechanical engineering, MDEs are involved in the study of granular matter and sandpiles; in robotics, they are used to model impacts on joints (see \cite{Brogliato} and \cite{ALeonov}).
-A particular case where MDEs take part is given by impulsive models; see \cite{Bainov}, \cite{Bainov_2}, and \cite{Lakshmikan}.
-For example, in mechanical systems, the impact between two bodies can be thought of as a short-duration phenomenon that causes a sudden change in the dynamics of the bodies.
-Consequently, impacts are usually represented as large forces acting over an infinitesimally short time interval.
-Control theory is another source of equations with measures. 
-For example, in the optimization of the mechanics of space flights and in the movement of robots, the classic variational procedures do not allow us to find optimal controls with an impulsive character  (\cite{S.T.Zavalishchin}).
-Beyond the applications, the problems of differential equations with measures are, from a purely mathematical point of view, a natural generalization of ordinary differential equations and, in our opinion, this fact justifies their study. 
+Beyond applications, differential equations with measures constitute, from a purely mathematical point of view, a natural generalization of ordinary differential equations, and, in our opinion, this fact justifies their study.
 
+The problem of finding periodic solutions to impulsive systems has attracted considerable attention. It has been addressed in the literature using various techniques; see, for example, \cite{Zhang-2010,Li-2014,Tian-2008,daoudi2013variational,li2020infinitely,Jingl-2013,zhang2008periodic,yang2011periodic,graef2015nontrivial,Liu-2019,heidarkhani2015infinitely}. To the best of our knowledge, the present paper is the first to approach this problem via the shooting method.  
 
-The problem of finding periodic solutions to impulsive systems has attracted the attention of researchers. This problem has been addressed in the literature using various techniques; see, for example, \cite{Zhang-2010,Li-2014,Tian-2008,daoudi2013variational,li2020infinitely,Jingl-2013,zhang2008periodic,yang2011periodic,graef2015nontrivial,Liu-2019,heidarkhani2015infinitely}. To the best of our knowledge, this article is the first to focus on the shooting method. \comment{Revisar esto, lo acabo de agregar}
+Several integration theories have been used to deal with problems such as those described above, namely the Lebesgue--Stieltjes, Perron--Stieltjes, and Kurzweil--Henstock integrals (see, for example, \cite{S.Schwabik320,JaroslavKurzweil1411,StefanSchwabik75,EveraldoM.Bonotto420}).
 
-
-Several integration theories have been used to deal with problems as those described before, namely Lebesgue-Stieltjes, Perron-Stieltjes, Kurzweil-Henstock integrals (see for example    \cite{S.Schwabik320,JaroslavKurzweil1411,StefanSchwabik75,EveraldoM.Bonotto420}).
-
-
-
-
-
-We will use
-the shooting method to find solutions to the periodic boundary problem associated to a first order differential equations system.
-	The idea  consists on looking for a solution
-$u_\alpha$ to the initial value problem  
+We employ the shooting method to find solutions to the periodic boundary value problem associated with a first-order system of differential equations. The idea consists of seeking a solution $u_\alpha$ to the initial value problem  
 	\begin{equation}\label{eq:pvi}
 	\left\lbrace \begin{array}{l}
 		u'=f(t,u(t))d\mu\\
 		u(0)=\alpha,
 	\end{array}\right. \tag{${IVP}$}
 \end{equation}
-and then search a value of $\alpha\in\rr^2$ such that $u_\alpha(T)=\alpha$. That is,
-$\alpha$ is   a fixed point of the Poincaré operator    $P:\rr^2\to \rr^2$, defined as $P(\alpha)=u_\alpha(T)$. Under certain conditions, applying Brouwer's Theorem
-
-we can ensure the existence of solution to the periodic problem.
+and then finding a value $\alpha\in\rr^2$ such that $u_\alpha(T)=\alpha$. That is, $\alpha$ is a fixed point of the Poincaré operator $P:\rr^2\to \rr^2$, defined by $P(\alpha)=u_\alpha(T)$. Under suitable conditions, an application of Brouwer's Theorem ensures the existence of a solution to the periodic problem.
 
 Our main result is the following
 
-
  \begin{thm} \label{th:final}
- 	Let $\mu$ be  a finite a positive Borel  measure on $[0,T]$.  Let $\Omega\supset [0,T]\times\rr^n\to\rr^n$ be an open set. Let $f:\Omega \to\mathbb{R}^n$ be a  function satisfying the followig conditions:
+ 	Let $\mu$ be a finite positive Borel measure on $[0,T]$. Let $\Omega\supset [0,T]\times\rr^n\to\rr^n$ be an open set. Let $f:\Omega \to\mathbb{R}^n$ be a function satisfying the following conditions:
     \begin{enumerate}[label=\upshape($H_{\arabic*}$),ref= ($H_{\arabic*}$)]
- 	\item \label{pm1} For each $x\in\rr^n$, $f(t,x)$ is  $\mu$-measurable with respecto to variable $t$.
-     	\item \label{pm2} The function $f$ is Lipschitz with respect to  variable $x$.
-\item \label{pm2.5}$f$ is continuous at $t$, when  $\mu(\{t\})=0$.
+ 	\item \label{pm1} For each $x\in\rr^n$, $f(t,x)$ is $\mu$-measurable with respect to the variable $t$.
+     	\item \label{pm2} The function $f$ is Lipschitz with respect to the variable $x$.
+\item \label{pm2.5} $f$ is continuous with respect to $t$ at every point such that $\mu(\{t\})=0$.
 
- \item     There exists a ball $B(0, R)$ such that:
+ \item There exists a ball $B(0, R)$ such that:
   \begin{enumerate}[label=\upshape($H_{\arabic{enumi}\arabic*}$),ref= ($H_{\arabic{enumi}\arabic*}$)]
 
-		\item\label{eq:lp} There exists $x^*\in\mathbb{R}^n$ such that $f(\cdot,x^*)\in L^2([0,T],d\mu)$.
+		\item\label{eq:lp} There exists $x^*\in B(0,R)$ such that $f(\cdot,x^*)\in L^2([0,T],d\mu)$.
 
-        \item \label{eq:tele} For every $t \in [0,T]$ and every $x \in \overline{B(0,R)}$, we have $$x + f(t,x)\mu({t}) \in \overline{B(0,R)}.$$
+        \item \label{eq:tele} For every $t \in [0,T]$ and every $x \in \overline{B(0,R)}$, we have $$x + f(t,x)\mu(\{t\}) \in \overline{B(0,R)}.$$
 
-    \item \label{eq:tran} For every $t \in [0,T]$ with $\mu({t}) = 0$ and every $x$ such that $|x| = R$, we have $f(t, x) \cdot x < 0$.
+    \item \label{eq:tran} For every $t \in [0,T]$ with $\mu(\{t\}) = 0$ and every $x$ such that $|x| = R$, we have $f(t, x) \cdot x < 0$.
     \end{enumerate}
   \end{enumerate}
  
- 	Then, the problem \eqref{eq:problema A} has at least a solution. 
+ 	Then, problem \eqref{eq:problema B} has at least one solution. 
 \end{thm}
 
 
-The paper is organized as follows. In Section \ref{sec:preli} we review some definitions and results on Lebesgue-Stieltjes measures for functions of bounded variation. In Section \ref{sec:gronwall} we show a version of Gronwall's lemma involving inequalities with a positive Borel measure instead Lebesgue measure. This lemma will help us prove the main theorem in Section \ref{sec:main_th}. Finally, in Section \ref{sec:ejem} we show an example.
-
-
+The paper is organized as follows. In Section \ref{sec:preli} we review some definitions and results on Lebesgue--Stieltjes measures for functions of bounded variation. In Section \ref{sec:gronwall} we prove a version of Gronwall's lemma involving inequalities with respect to a positive Borel measure instead of the Lebesgue measure. This lemma will be used to prove the main theorem in Section \ref{sec:main_th}. Finally, in Section \ref{sec:ejem}, we apply our result to the problem of finding periodic solutions to a system describing a pendulum subject to an impulsive force. We also present a computational implementation of the shooting method to approximate the corresponding solution.
 %===================SECTION 2: NOTACION Y RESULTADOS PRELIMINARES=================================
 
 \section{Preliminaries}\label{sec:preli}
 
 
 
-As usual, we will denote by   $\rr^n$ the set
-of all $n$-uples with real components.  
-If $x\in \rr^n$, we will write the euclidean norm as $|x|=\sqrt{x_1^2+\cdots x_n^2}$, and the taxicab norm as $|x|_1=|x_1|+\cdots +|x_n|$. 
-We will use the dot product on $\rr^n $ defined by $x\cdot y=x_1y_1 + \cdots+
-x_ny_n$. 
+As usual, we denote by $\rr^n$ the set of all $n$-tuples with real components.  
+If $x\in \rr^n$, we write the Euclidean norm as $|x|=\sqrt{x_1^2+\cdots x_n^2}$, and the taxicab norm as $|x|_1=|x_1|+\cdots +|x_n|$. 
+We use the dot product on $\rr^n$ defined by $x\cdot y=x_1y_1 + \cdots + x_ny_n$.
 
+The set of all continuous functions $f:[0,T]\to \rr^n$ will be denoted by $C([0,T],\rr^n)$, or simply $C([0,T])$ when the codomain is $\rr$.    
 
-The set of all continuous functions $f:[0,T]\to \rr^n$ will be denoted by $C([0,T],\rr^n)$ or simply $C([0,T])$ if the   co-domain is $\rr$.    
+We briefly introduce some notation related to measure theory; we refer to \cite{StanislawSaks,EdwinHewitt,folland, Evans, Carter} for further details on the material presented in this section.
 
-We briefly introduce some notations related to measure theory, we suggest  \cite{StanislawSaks,EdwinHewitt,folland, Evans, Carter} as a reference to the theory introduced in this section.
+Given a Borel measurable subset $A$ of $\rr$, we denote by $\mathscr{B}(A)$ the $\sigma$-algebra of all Borel subsets of $A$. If $\mu$ is a signed measure, we write $\mu=\mu^+ -\mu^-$ for the Jordan decomposition of $\mu$, and $|\mu|$ for the \emph{total variation} of $\mu$, that is, $|\mu|=\mu^+ +\mu^-$. We write $\mu\perp \eta$ to indicate that $\mu$ and $\eta$ are \emph{mutually singular} measures. We say that a measure $\mu$ is \emph{continuous} if, for every $t\in \Omega$, it holds that $\mu(\{t\})=0$. We use the symbol $\lambda$ to denote the Lebesgue measure on $\mathbb{R}$.
 
-Given  a Borel measurable subset $A$ of 
- $\rr$, we denote by $\mathscr{B}(A)$ 
- the $\sigma$-algebra of all Borel subsets of $A$.
-If $\mu$ is a signed measure, we write  $\mu=\mu^+ -\mu^-$ for Jordan decomposition of $\mu$ and  $|\mu|$ to the \emph{total variation} of measure $\mu$, i.e. $|\mu|=\mu^+ +\mu^-$. We denote by  $\mu\perp \eta$ the fact of $\mu$ and $\eta$ are \emph{mutually singular} measures. We say  that a  measure  $\mu$ is \emph{continuous}  if 	for every $t\in \Omega$, it holds that $\mu(\{t\})=0$. We use the symbol  $\lambda$ to indicate the Lebesgue measure on $\mathbb{R}$.
+As mentioned above, the set of all functions of bounded variation $\varphi:[0,T]\to \rr^n$ is denoted by $BV([0,T],\rr^n)$. If $\varphi\in BV([0,T],\rr^n)$, we denote by $\V(\varphi,[0,T])$ the \emph{total variation} of $\varphi$. As is well known, functions in $BV([0,T],\rr^n)$ have one-sided limits at every $t\in [0,T]$ and are continuous except at a set that is at most countable. If $\varphi\in BV([0,T],\rr^n)$, then there exists a unique Borel measure, denoted by $\mu_{\varphi}$, such that $\mu_{\varphi}([a,b))=\varphi(b^-)-\varphi(a^-)$ for every $a$ and $b$ in $[0,T]$. This measure is called the \emph{Lebesgue--Stieltjes measure induced by $\varphi$} (see \cite{folland} for details). We will usually assume that $\varphi$ is left-continuous, in which case $\mu_{\varphi}([a,b))=\varphi(b)-\varphi(a)$.
 
-As we have already mentioned, the set of all bounded variation functions $\varphi:[0,T]\to \rr^n$ is denoted by
-$BV([0,T],\rr^n)$. If $\varphi\in BV([0,T],\rr^n)$, we denote by $\V(\varphi,[0,T])$ the \emph{total variation} of the function $\varphi$. As is well known, functions in $ BV([0,T],\rr^n)$ have lateral limits at every $t\in [0,T]$ and are continuous except for a set that is at most countable. We note that $\varphi$ is continuous  Given $\varphi\in BV([0,T],\rr^n)$,  There exists a unique Borel measure, which we denote  $\mu_{\varphi}$, such that  $\mu_{\varphi}([a,b))=\varphi(b^-)-\varphi(a^-)$ for every $a$ and $b$ in $[0,T]$.  This measure is called the \emph{Lebesgue-Stieltjes measure} (see \cite{folland} for details). We will usually assume that $\varphi$ is left-continuous on the left, in which case  $\mu_{\varphi}([a,b))=\varphi(b)-\varphi(a)$.
+The existence of local and global solutions to initial value problems for MDEs has been studied extensively in the literature. We refer, in particular, to the approach developed in \cite{P.Mazzone}, where the following theorem is established. We adapt its statement to suit the needs of this article.
 
-The existence of local and global solutions to initial value problems for MDEs has various bibliographical antecedents. We suggest the approach developed in \cite{P.Mazzone}, where the following theorem was established. We adapt the statement to the needs of this article.
-
-
-\begin{thm}\label{th:prop_max} Let $\mu$ be a finite measure,  $\Omega$ be an open set of $\rr\times \rr^n$ and  $(0,\alpha)\in\Omega$. Suppose that $f:\Omega\to\mathbb{R}^n$ is a locally Lipschitz function with respect to the second variable for $t\geq 0$ and  that $\varphi$ is  a  solution of \eqref{eq:pvi}
-defined in an maximal semi-open interval $[0,t_1)$.  Then, one and only one of the following assertions holds true.
+\begin{thm}\label{th:prop_max} Let $\mu$ be a finite measure, $\Omega$ be an open set of $\rr\times \rr^n$, and $(0,\alpha)\in\Omega$. Suppose that $f:\Omega\to\mathbb{R}^n$ is locally Lipschitz with respect to the second variable for $t\geq 0$, and that $\varphi$ is a solution of \eqref{eq:pvi} defined on a maximal half-open interval $[0,t_1)$. Then exactly one of the following assertions holds:
 \begin{enumerate}
-\item  For every $K\Subset \Omega$ there exists $t_2\in I$  such that $(t,\varphi(t))\notin K, \forall t\in (t_2,t_1)$,
-\item There exists the limit $x_1:=\lim\limits_{t\to t_1^-}\varphi(t)$, $(t_1,x_1)\in \Omega$ and  $(t_1,x_1+f(t_1,x_1)\mu(\{t_1\}))\notin \Omega$.
+\item For every $K\Subset \Omega$ there exists $t_2\in [0,t_1)$ such that $(t,\varphi(t))\notin K$ for all $t\in (t_2,t_1)$,
+\item The limit $x_1:=\lim\limits_{t\to t_1^-}\varphi(t)$ exists, $(t_1,x_1)\in \Omega$, and $(t_1,x_1+f(t_1,x_1)\mu(\{t_1\}))\notin \Omega$.
 \end{enumerate}
-If $|\mu|(\{t_1\})=0$ then alternative 1 is true. Otherwise, either of the two conditions can be true.
+If $|\mu|(\{t_1\})=0$, then alternative 1 holds. Otherwise, either of the two assertions may occur.
 \end{thm}
-
- 
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{  A Gronwall type Lemma for Measures}\label{sec:gronwall}
+\section{A Gronwall-Type Lemma for Measures}\label{sec:gronwall}
 
-We will first prove a Gronwall-type inequality for continuous measures and after we will generalize this inequality to any positive Borel measure.
+We first prove a Gronwall-type inequality for continuous measures and then extend this result to arbitrary positive Borel measures.
 
 \begin{lem}\label{Lema gronwall}
 	Let $\mu$ be a finite, positive, continuous measure. 
-	If $u\in L^1(\mu) $ satisfies 
+	If $u\in L^1(\mu)$ satisfies 
 	\begin{equation}
 		u(t)\leq c+\int_{[0,t)}u(r) \; d\mu, \label{eq:lema gronwall}
 	\end{equation}
@@ -315,8 +279,8 @@ then $u(t)\leq ce^{\mu([0,t))}$.
 \end{lem}
 
 \begin{proof}
-	We write  $w(t)= c+ \int_{[0,t)}u(r) \; d\mu(r)$,  $F(s)=-e^{-s}$ and $h(t)=\mu([0,t))$. Note that   $h$ is a continuous function and $\mu_h=\mu$.
-	The Lebesgue-Stieljes measure $\mu_{w}$ associated with $w$ satisfies $\mu_w\ll \mu$ and $d\mu_w=ud\mu$. Additionally, using the chain rule for $BV$ functions  (see \cite[Th. 3.99]{LuigiAmbrosio1517}, note that $\mu$ has null jump part),  we have that $\mu_{F\circ h}=F'\left( h(r)\right)\mu$. Therefore, we obtain
+	We define $w(t)= c+ \int_{[0,t)}u(r) \; d\mu(r)$, $F(s)=-e^{-s}$, and $h(t)=\mu([0,t))$. Note that $h$ is a continuous function and $\mu_h=\mu$.
+	The Lebesgue--Stieltjes measure $\mu_{w}$ associated with $w$ satisfies $\mu_w\ll \mu$ and $d\mu_w=ud\mu$. Additionally, using the chain rule for $BV$ functions (see \cite[Th. 3.99]{LuigiAmbrosio1517}; note that $\mu$ has no jump part), we have that $\mu_{F\circ h}=F'\left( h(r)\right)\mu$. Therefore, we obtain
 \begin{equation*}
     \begin{split}
 	\int_{[0,t)}-F\left( h(r)\right)\; dw \leq \int_{[0,t)}F'\left( h(r)\right)w(r)\; d\mu
@@ -324,8 +288,7 @@ then $u(t)\leq ce^{\mu([0,t))}$.
  \end{split}
 \end{equation*}
 
-Then,  using the Integral Part Formula, see  \cite[Th. 14.1]{StanislawSaks}, and taking account of the continuity of $F\circ h$,
-we have  
+Then, using the integration by parts formula (see \cite[Th. 14.1]{StanislawSaks}) and taking into account the continuity of $F\circ h$, we have  
 \begin{equation*}
 \begin{split}
 	0\leq &\int_{[0,t)}F(h(r))\; dw+  \int_{[0,t)}w(r)\; \mu_{F\circ h}=
@@ -334,62 +297,55 @@ we have
     \end{split}
 \end{equation*}
 %
-Therefore we can conclude
- $$u(t)\leq w(t)\leq c\exp\left( \mu([0,t))\right),  \quad c=F(h(0))w(0) $$
+Therefore, we conclude
+ $$u(t)\leq w(t)\leq c\exp\left( \mu([0,t))\right).$$
 %
 \end{proof}
 
 
 
-
 \begin{defi}\label{mu_a}
-	Let $\mu$ be a finite positive measure and let $D=\{\tau\in I \mid \mu(\{\tau\})>0\}$.
-For any  Borel set  $A$, we define $\mu_j$ as the induced measure by $\mu$ on $D$ or \emph{jump part of } $\mu$, i.e.
+	Let $\mu$ be a finite positive measure and let $D=\{\tau\in [0,T] \mid \mu(\{\tau\})>0\}$.
+For any Borel set $A$, we define the \emph{jump part of} $\mu$ as the measure $\mu_j$ induced by $\mu$ on $D$, that is,
 $$\mu_j(A):=\sum_{\tau\in D\cap A}\mu(\{\tau\})=\mu\left(D\cap A\right).$$
-Moreover, we introduce the continuous  measure 
+Moreover, we introduce the continuous measure 
 $$\bar{\mu}\left(A\right):=\mu(A)-\mu_j\left(A \right)=\mu\left(A\setminus D \right).$$
 In other words, in the terminology of Ambrosio et al. (see \cite{LuigiAmbrosio1517}), $\bar{\mu}$ is the sum of the Cantor and absolutely continuous parts of $\mu$. Note that $\mu_j$ and $\bar{\mu}$ are mutually singular Borel measures.
 \end{defi}
 
 
-
-
-\begin{thm}[\textbf{Generalized Gronwall Inequality}] \label{TG} 	Let $\mu$ be a  finite, positive measure. If $u\in L^1(\mu) $ satisfies  
+\begin{thm}[\textbf{Generalized Gronwall Inequality}] \label{TG} 	Let $\mu$ be a finite, positive measure. If $u\in L^1(\mu)$ satisfies  
 	\begin{equation*}
 		u(t)\leq c+\int_{[0,t)}u(r) \; d\mu, 
-	\end{equation*} then
+	\end{equation*} 
+then
 \begin{equation*}
 	u(t)\leq ce^{K(t)\mu([0,t))},
 \end{equation*}
-where $K(t)=\displaystyle\prod_{\tau\in D\cap(0,t)}\left( 1+\mu(\{\tau\})\right) $.
+where $K(t)=\displaystyle\prod_{\tau\in D\cap(0,t)}\left( 1+\mu(\{\tau\})\right)$.
 
 \end{thm}
 
-
-
-
-
 \begin{proof}
-We take $\epsilon>0$. From the absolutely continuity of the integral, there exists  $\delta>0$ such that
+We fix $\epsilon>0$. By the absolute continuity of the integral, there exists $\delta>0$ such that
 
 \begin{equation}\label{eq:abs_cont}
-    \text{if } \mu(A)\leq\delta\quad \text{ then  }\quad \left| \int_Au(r)\; d\mu\right| \leq \epsilon.
+    \text{if } \mu(A)\leq\delta\quad \text{ then }\quad \left| \int_A u(r)\; d\mu\right| \leq \epsilon.
 \end{equation}
 
+We define $w(t)=c+\int_{[0,t)}u(s)\;d\mu$. Fix an arbitrary $t\in [0,T)$. Since $D$ is countable, we may assume that $D\cap[0,t)=\left\lbrace t_n\right\rbrace _{n=1}^\infty$. In addition, since
 
-We define $w(t)=c+\int_{[0,t)}u(s)\;d\mu$. Fix an arbitrary  $t\in  [0,T)$. Since  $D$ is a countable set,  we can assume that $ D\cap[0,t)=\left\lbrace t_n\right\rbrace _{n=1}^\infty$. In addition, as
-
-	\begin{equation}\sum_{n=1}^\infty\mu(\{t_n\})=\mu(D\cap[0,t))<\infty,\label{eq:4.1}
-	\end{equation}
-Now, by \eqref{eq:4.1} there exists $N\in\nn$ such that
-
+\begin{equation}\sum_{n=1}^\infty\mu(\{t_n\})=\mu(D\cap[0,t))<\infty,\label{eq:4.1},
+\end{equation}
+there exists $N\in\nn$ such that
 
 \begin{equation}\label{eq:sum_disc}
 \sum_{n=N+1}^{\infty}\mu(\{t_n\})\leq \delta.
 \end{equation}
-Let $\{s_1,\ldots,s_N\}$ be an ascending  reordering of the set $D_\delta:=\{t_1,\ldots, t_N\}$. Additionally we put $s_{N+1}=t$.
 
-Descomposing the integral and using the inequality  $u\leq w$,  we obtain
+Let $\{s_1,\ldots,s_N\}$ be an increasing reordering of the set $D_\delta:=\{t_1,\ldots, t_N\}$. Additionally, we set $s_{N+1}=t$.
+
+Decomposing the integral and using the inequality $u\leq w$, we obtain
 
 \begin{equation}
 \begin{split}
@@ -416,7 +372,7 @@ Doing $\epsilon\to 0$ and taking account of that $K(r)$ is increasing for every 
 	u(r)\leq w(r)\leq cK(t)+K(t)\int_{[0,r)}u(s)\;d\bar{\mu}. 
 \end{equation*}
 
-Now, since $\bar{\mu}$ is a continuous measure, we are in conditions of applying Lemma \ref{Lema gronwall}.  We obtain
+Now, since $\bar{\mu}$ is a continuous measure, we are in a position to  apply  Lemma \ref{Lema gronwall}.  We obtain
 
 
 
@@ -439,20 +395,20 @@ The statement follows from the last inequalities.
 
 Throughout this section, we will assume that $f$ is as in the statement of Theorem \ref{th:final}.
  
- In what follows, when considering solutions of \eqref{eq:pvi}, we will assume that they are defined in a maximum semi-open interval $I_{\varphi}=[0,t_{\varphi})$. We note that if $\lim_{t\nearrow t_{\varphi}}\varphi(t)$ exists, then the left-continuous extension of $\varphi$ to the closed interval $[0,T]$ is also solution on that interval.
+ In what follows, when considering solutions of \eqref{eq:pvi}, we will assume that they are defined on a maximum half-open interval $I_{\varphi}=[0,t_{\varphi})$. We note that if $\lim_{t\nearrow t_{\varphi}}\varphi(t)$ exists, then the left-continuous extension of $\varphi$ to the closed interval $[0,T]$ is also a  solution in that interval.
  
 \begin{prop}\label{corolario_continuidad}
      Let $\varphi_\alpha$ be a  solution of the \eqref{eq:pvi}. 
-		Then $[0,T]\subset [0,t_{\varphi}]$ and   $\varphi_{\alpha}\in L^\infty([0,T],\rr^n)$. Moreover, there exist a function $0\leq b\in L^2([0,T],d\mu)$  such that if  $s\leq t$ then
+		Then $[0,T]\subset [0,t_{\varphi}]$ and   $\varphi_{\alpha}\in L^\infty([0,T],\rr^n)$. Moreover, there exists a function $0\leq b\in L^2([0,T],d\mu)$  such that if  $s\leq t$ then
     \begin{equation*}\label{acotación}
         \left| \varphi_\alpha(t)-\varphi_\alpha(s)\right|\leq \int_{[s,t)}b(r)d\mu(r).
     \end{equation*}
-If it happens that  $\mu$ is continuous at $t_0\in [0,T]$,  then $\varphi_\alpha$ is  continuous at $t_0$.
+If $\mu$ is continuous at $t_0\in [0,T]$,  then $\varphi_\alpha$ is  continuous at $t_0$.
 \end{prop}
 
  
 
-\begin{proof}    As a consequence of  \ref{pm2} and \ref{eq:lp} we obtain
+\begin{proof}    As a consequence of  \ref{pm2} and \ref{eq:lp}, we obtain
 
 \begin{equation}\label{eq:cota_f}
  |f(t,x)|\leq |f(t,x^*)|+a|x-x^*|=\gamma(t)+L|x|,
@@ -475,14 +431,14 @@ We conclude that
 $\varphi_{\alpha}\in L^\infty([0,t_{\varphi}),\rr^n)$.
 %
 
-If $t_{\varphi}<T$ alternative 1 of the Theorem \ref{th:prop_max} would be false because $\varphi_{\alpha}(t)$ would be inside the compact set $[0,T]\times \overline{B(0,\|\varphi_{\alpha}\|_{L^\infty})}$ for every $t\in[0,t_\varphi)$. Since alternative 2 is trivially false, there is nothing left but $t_\varphi\geq T$.
+If $t_{\varphi}<T$ were true, statement 1 of Theorem \ref{th:prop_max} would be false because $\varphi_{\alpha}(t)$ would be inside the compact set $[0,T]\times \overline{B(0,\|\varphi_{\alpha}\|_{L^\infty})}$ for every $t\in[0,t_\varphi)$. Since alternative 2 of Theorem \ref{th:prop_max} is trivially false, there is nothing left but $t_\varphi\geq T$.
 
 On the other hand, for  $s\leq t$ it holds that
   	\begin{multline*}
   		|\varphi_\alpha(t)-\varphi_\alpha(s)|\leq \int_{[s,t)}|f(r,\varphi_\alpha(r))|\;d\mu \\ \leq  \int_{[s,t)}L\|\varphi_\alpha\|_{\infty} + \gamma\;d\mu=:\int_{[s,t)}b(r)\;d \mu(r).
   	\end{multline*}
 
-Note that $b=L\|\varphi_\alpha\|_{\infty} + \gamma\in L^2([0,T],d\mu)$. The last part of Proposition is an immediate consequence of inequality \eqref{acotación}.
+Note that $b=L\|\varphi_\alpha\|_{\infty} + \gamma\in L^2([0,T],d\mu)$. The last part of the proposition is an immediate consequence of inequality \eqref{acotación}.
 \end{proof}
 
 
@@ -490,10 +446,10 @@ Note that $b=L\|\varphi_\alpha\|_{\infty} + \gamma\in L^2([0,T],d\mu)$. The last
 
 
 \begin{defi} \label{def:op-poincare}
-We will call Poincaré operator to the mapping  $P:\rr^n\to \rr^n$  defined by  $P(\alpha)=\varphi_\alpha(T)$, where  $\varphi_\alpha$ is a solution of \eqref{eq:pvi}.
+We will call  the mapping  $P:\rr^n\to \rr^n$  defined by  $P(\alpha)=\varphi_\alpha(T)$ Poincaré operator, where  $\varphi_\alpha$ is a solution of \eqref{eq:pvi}.
 \end{defi}
 
- Solutions to initial value problems associated with  MDE may be discontinuous with respect to time. The following result shows that they are continuous with respect to the initial condition.
+ Solutions to initial value problems associated with  MDE may be discontinuous with respect to time. The following result shows that such solutions are continuous with respect to the initial condition.
 
  \begin{lem}
    The Poincaré operator is Lipschitz continuous.\label{opr continuo}
@@ -512,26 +468,24 @@ We will call Poincaré operator to the mapping  $P:\rr^n\to \rr^n$  defined by  
 \begin{equation*}
 |P(\alpha)-P(\beta)|=|\varphi_\alpha(T)-\varphi_\beta(T)|\leq  |\alpha-\beta|e^{K(T)L\mu([0,T))}.
 \end{equation*}
- This inequality proves the statement of lemma.
+ This inequality proves the assertion of the lemma.
 \end{proof}
  
  
 
 
-Let us recall the properties of radius $R$ from the statement of Theorem \eqref{th:final}.
+Recall the properties of radius $R$ from the statement of Theorem \eqref{th:final}.
 
  \begin{thm} \label{th: P} The closed ball $ \overline{B(0,R)}$ is an invariant set for the Poincaré map, i.e.  
  $P\left(  \overline{B(0,R)}\right)  \subset \overline{B(0,R)}$.
  \end{thm}
 
-
-
- \begin{proof} Let $\alpha\in  \overline{B(0,R)}$ and let $\varphi_\alpha$ be the  solution of the \eqref{eq:pvi} defined on a maximal interval. We define the set
+ \begin{proof} Let $\alpha\in  \overline{B(0,R)}$ and let $\varphi_\alpha$ be the  solution of \eqref{eq:pvi} defined on a maximal interval. We define the set
 \[A=\left\{t\in [0,T] \mid \varphi_\alpha(s)\in \overline{B(0,R)}, \; \forall s\in [0,t]\right\}.\]
-We are going to see that the set $A$ is simultaneously relatively  open and closed to  the interval $[0,T]$. Since $[0,T]$ is connected, then  $A=[0,T]$.
+We will see that the set $A$ is simultaneously relatively  open and closed to  the interval $[0,T]$. Since $[0,T]$ is connected, then  $A=[0,T]$.
   
-First, we will prove that $A$  is a closed.    
-Let  $t_n$ be a sequence in $A$ that converges to $t$. If  $t_n\geq t$ for some $n$, then  $\varphi_\alpha(s)\in\overline{B(0,R)}$ for every $s\in [0,t]$, and therefore $t\in A$.  On the contrary,   if $t_n < t$ for every $n$,  as $\varphi_\alpha$ is left-continuous, we have $\lim_{n\to \infty}\varphi_\alpha(t_n)=\varphi_\alpha(t)$; and, due to $\varphi_\alpha(t_n)\in \overline{B(0,R)}$,  follows straightforwardly that $\varphi_\alpha(t)\in \overline{B(0,R)}$, i.e. $t\in A$.  Thus, $A$ is closed.
+First, we will prove that $A$  is  closed.    
+Let  $t_n$ be a sequence in $A$ that converges to $t$. If  $t_n\geq t$ for some $n$, then  $\varphi_\alpha(s)\in\overline{B(0,R)}$ for every $s\in [0,t]$, and therefore $t\in A$.  Conversely,  if $t_n < t$ for every $n$,  since $\varphi_\alpha$ is left-continuous, we have $\lim_{n\to \infty}\varphi_\alpha(t_n)=\varphi_\alpha(t)$; and, due to $\varphi_\alpha(t_n)\in \overline{B(0,R)}$, it follows straightforwardly that $\varphi_\alpha(t)\in \overline{B(0,R)}$, i.e. $t\in A$.  Thus, $A$ is closed.
 
 We observe that by definition $A$ is an interval.  	 
 If  we suppose that $A$ is not open relative to $[0,T]$, then  there would be $ t_0\in A$ such that for every $t> t_0$ it holds that $t\notin A$. As $t_0\in A$ then  $\varphi_\alpha(t_0)\leq R$. We can consider three cases:
@@ -542,20 +496,20 @@ If  we suppose that $A$ is not open relative to $[0,T]$, then  there would be $ 
  \paragraph{\emph{Case 2.}} \emph{ Suppose that $\varphi(t_0)\in \partial B(0,R)$ and $\mu(\{t_0\})= 0$. }  According to  \ref{eq:tran}, $\beta:=-f(t_0,\varphi(t_0))\cdot\varphi(t_0)/\,|\varphi_\alpha(t_0)|>0$. By  Proposition  \ref{corolario_continuidad} and by \ref{pm2.5},  there exists $\delta>0$ such that if $t\in[t_0,t_0+\delta)$ then 
  
  $$ |\varphi_\alpha(s)-\varphi_\alpha(t_0)|<\frac{\beta}{3L}\quad \text{ and }\quad |f(s,\varphi_\alpha(t_0))-f(t_0,\varphi_\alpha(t_0))|\leq \frac{\beta}{3}.   $$ 
-  
+   
  
  
+ Therefore, using the Lipschitz condition on $f$,
  
- 
- 
- Therefore, using the Lipschitz condition for $f$,
- 
- \begin{multline*}
-      \left[ \varphi_\alpha(t)-\varphi_\alpha(t_0) \right] \cdot \frac{\varphi_\alpha(t_0)}{|\varphi_\alpha(t_0)|} \leq \int_{[t_0,t)}\left|f(s,\varphi_\alpha(s))-f(s,\varphi_\alpha(t_0))\right|\; d\mu\\  + \int_{[t_0,t)}\left|f(s,\varphi_\alpha(t_0))-f(t_0,\varphi_\alpha(t_0))\right| \; d\mu \\ + \int_{[t_0,t)}f(t_0,\varphi_\alpha(t_0))\cdot \frac{\varphi_\alpha(t_0)}{\,|\varphi_\alpha(t_0)|}\; d\mu
+% \begin{multline*}
+\[\begin{split}
+      \left[ \varphi_\alpha(t)-\varphi_\alpha(t_0) \right] \cdot \frac{\varphi_\alpha(t_0)}{|\varphi_\alpha(t_0)|} &\leq \int_{[t_0,t)}\left|f(s,\varphi_\alpha(s))-f(s,\varphi_\alpha(t_0))\right|\; d\mu\\  &+ \int_{[t_0,t)}\left|f(s,\varphi_\alpha(t_0))-f(t_0,\varphi_\alpha(t_0))\right| \; d\mu \\ &+ \int_{[t_0,t)}f(t_0,\varphi_\alpha(t_0))\cdot \frac{\varphi_\alpha(t_0)}{\,|\varphi_\alpha(t_0)|}\; d\mu
 \leq -\frac{\beta}{3}\mu([t_0,t)).
-\end{multline*}	
+\end{split}
+\]
+%\end{multline*}	
  
-  Considering the first-order Taylor polynomial approximation around $|\varphi_\alpha(t_0)|$ to the Euclidean norm function,  taking account of Proposition \ref{corolario_continuidad}, Cauchy-Schwarz inequality and the fact that $b\in L^2$,
+  Considering the first-order Taylor polynomial approximation around $|\varphi_\alpha(t_0)|$ to the Euclidean norm function,  taking into account Proposition \ref{corolario_continuidad}, the Cauchy-Schwarz inequality, and the fact that $b\in L^2$,we have
   
 \begin{equation*}
     \begin{split}
@@ -564,18 +518,18 @@ If  we suppose that $A$ is not open relative to $[0,T]$, then  there would be $ 
      \end{split}
 \end{equation*}
 
-Since $\lim_{t\searrow t_0}\mu([t_0,t))=\mu(\{t_0\})=0$, the last expression in the previous inequalities chain is negative for $t$ enough close to $t_0$. Therefore, there exists a neighborhood $V$ of $t_0$ such that  $|\varphi_\alpha(t)|\leq R $ for all $t\in V$, i.e. $A$ is an open set. This completes the proof of this case.
+Since $\lim_{t\searrow t_0}\mu([t_0,t))=\mu(\{t_0\})=0$, the last expression in the previous inequality is negative for $t$ close enough to $t_0$. Therefore, there exists a neighborhood $V$ of $t_0$ such that  $|\varphi_\alpha(t)|\leq R $ for all $t\in V$, i.e. $A$ is an open set. This completes the proof of this case.
      
 
 \paragraph{\emph{Case 3.  $\mu(\{t_0\})\neq 0$.}} 
-  Using Lebesgue Dominated Convergence Theorem and \ref{eq:tele}, we obtain  that 
+  Using the Lebesgue Dominated Convergence Theorem and \ref{eq:tele}, we obtain  that 
 \begin{equation*}
     \begin{split}
-        \lim_{t\searrow t_0}\varphi_{\alpha}(t)= \varphi_{\alpha}(t_0)+ f(t_0,\varphi_{\alpha}(t_0))\mu(\{t_0\})\in B(0,R)
+        \lim_{t\searrow t_0}\varphi_{\alpha}(t)= \varphi_{\alpha}(t_0)+ f(t_0,\varphi_{\alpha}(t_0))\mu(\{t_0\})\in B(0,R).
     \end{split}
 \end{equation*}
 
- Therefore, there exists $\delta>0$ such that for all  $t\in [t_0,t_0+\delta)$ it satisfies that $|\varphi_\alpha(t)|<R$, which is a contradiction with the fact that $t_0$ is the supremum of $A$.
+ Therefore, there exists $\delta>0$ such that $|\varphi_\alpha(t)|<R$ for all  $t\in [t_0,t_0+\delta)$, contradicting the fact that $t_0$ is the supremum of $A$.
 
 
 Then $A=[0,T]$. Consequently, for any $\alpha\in\overline{B(0,R)}$, it holds that $P(\alpha)=\varphi_\alpha(T)\in\overline{B(0,R)}.$ 
@@ -601,7 +555,7 @@ Now,  Theorem \ref{th:final} follows immediately.
  \end{proof} 
 
  \begin{obs}\label{rem:otroK}
-Obviously, we can replace the ball in Theorem \ref{th:final} by any set that satisfies Brouwer's Theorem, in particular by a compact and convex set $K$. In that case, we must to replace   the vector $x$ in inequality $f\cdot x<0$ by the exterior normal vector $\vec{n}$ to $K$ at $x$.     Simultaneously, we can consider the case in which $\partial K$ has subsets  invariant under the flow. With all this in mind, we can replace hypothesis  \ref{eq:tran}  by
+Clearly, we can replace the ball in Theorem \ref{th:final} by any set that satisfies Brouwer's Theorem, in particular any compact and convex set $K$. In that case, we must to replace   the vector $x$ in inequality $f\cdot x<0$ by the exterior normal vector $\vec{n}$ to $K$ at $x$.     Simultaneously, we can consider the case in which $\partial K$ has subsets  invariant under the flow. With all this in mind, we can replace hypothesis  \ref{eq:tran}  by
 
 
 \begin{enumerate}
@@ -616,23 +570,23 @@ Obviously, we can replace the ball in Theorem \ref{th:final} by any set that sat
 
 
  \section{An Example:  Impulsively Forced and Damped Pendulum }\label{sec:ejem}
- 
+ \todoSA[]{Un ejemplo??? Al cambiar las condiciones parencen 2...}
  
     In order to illustrate the application of our main theorem, we will present a concrete example. We consider the  following $2\pi$-periodic boundary value problem
      
-     \begin{equation} \label{eq:problema A}
+     \begin{equation} 
 	\left\lbrace \begin{array}{l}
 		d\theta'= (-\sin \theta-c\theta') \, d\lambda+g(t,\theta,\theta')\,d\mu,    \\
 		\theta(0)-\theta(2\pi)=\theta'(0)-\theta'(2\pi)=0.
 	\end{array}\right. \label{eq:example 2.1}
 \end{equation}
 
-The equation correspond to   a damped and impulsively forced pendulum with viscosity constant to be equal to $c$. We assume that the external force is impulsive and is given by  a sum of delta measures
+The equation corresponds to   a damped and impulsively forced pendulum with viscosity constant equal to $c$. We assume that the external force is impulsive and is given by  a sum of delta measures
 $$\mu=\sum_{i=1}^{n}\alpha_i\delta_{t_i},$$
 where $D=\{t_1,\ldots,t_n\}$ is a finite subset of $[0,2\pi]$. We suppose that  $\alpha_i\in\mathbb{R}$, i.e.  $\mu$ can be a signed measure.
-The function $g$ will be supposed sufficiently regular. Let us remember that $\lambda$ is the Lebesgue measure.
+The function $g$ is supposed to be sufficiently regular. Recall that $\lambda$ is the Lebesgue measure.
   
- We can write equation in problem \eqref{eq:example 2.1}
+ We can write the equation in the problem \eqref{eq:example 2.1}
 as
 $$dx=F(t,x) \, d\nu,$$
 where $\nu$ is the positive measure $\nu=\lambda+\mu$, $x=(x_1,x_2)=(\theta,\theta')$ and
@@ -651,58 +605,63 @@ Here $\carac{A}$ denotes the indicator function with respect to the set $A$.
 
 We will take the set $K$ as 
 
-$$K=\left\{x\mid  -\pi<x_1<\pi,\; \frac{x_2^2}{2}-\cos x_1\leq 1\right\},$$
+$$K=\left\{x\mid  -\pi\leq x_1\leq \pi,\; \frac{x_2^2}{2}-\cos x_1\leq 1\right\},$$ 
  In physical terms, $K$ is the set of states with energy less or equal than 1, which is a closed and convex set.
 
 
- Let us show that we are within the scope of the Remark  \ref{rem:otroK}. We  take $\vec{n}=(\sin x_1,x_2)$ and $t\in [0,2\pi]$ with $\nu(\{t\})=0$, i.e.  $t\notin D$.  We consider first the damped case, that is $c>0$. In this situation,  inequality $F\cdot \vec{n}<0$ holds when $x \in \Gamma_1:=\partial K\setminus\{ (\pm\pi,0) \}$.  The set $\Gamma_2= \{ (\pm\pi,0) \}$ is trivially invariant for flow, because consists of equilibrium points. In the undamped case $(c=0)$,  the set $\partial K$ is invariant. This is  an immediate consequence of an  energy preserving argument  and of the fact that $c=0$ and $g=0$ on $\partial K$. In conclusion, the hypothesis  in Remark  \ref{rem:otroK} is satisfy.
+ Let us show that we are within the scope of the Remark  \ref{rem:otroK}. We  take $\vec{n}=(\sin x_1,x_2)$ and $t\in [0,2\pi]$ with $\nu(\{t\})=0$, i.e.  $t\notin D$.  We first consider the damped case, that is $c>0$. In this situation,  inequality $F\cdot \vec{n}<0$ holds when $x \in \Gamma_1:=\partial K\setminus\{ (\pm\pi,0) \}$.  The set $\Gamma_2= \{ (\pm\pi,0) \}$ is trivially invariant for flow, because it consists of equilibrium points. In the undamped case $(c=0)$,  the set $\partial K$ is invariant. This is  an immediate consequence of an  energy preserving argument  and the fact that $c=0$ and $g=0$ on $\partial K$. In conclusion, the hypothesis  in Remark  \ref{rem:otroK} is satisfied.
 
 
 
 
 
-In order to  $F$ to satisfy \ref{eq:tele} we have to choose $g$ appropriately. For example, if $g$ satisfies that $|g(t,x)|\leq {d(x,\partial K)}/{M}$, where $M=\displaystyle\sup_{t\in D}\left\{\nu(\{t\})\right\}$,  then \ref{eq:tele} holds.  Under all of the above assumptions, problem \eqref{eq:problema A} has a solution.
+In order for  $F$ to satisfy \ref{eq:tele} we have to choose $g$ appropriately. For example, if $g$ satisfies that $|g(t,x)|\leq {d(x,\partial K)}/{M}$, where $M=\displaystyle\sup_{t\in D}\left\{\nu(\{t\})\right\}$,  then \ref{eq:tele} is valid.  Under all of the above assumptions, problem \eqref{eq:example 2.1} has a solution.
 
-The shooting method can be used as an algorithm to numerically solve  periodic problems associated to MDEs. We programmed this algorithm using Python language (it can be found at \href{https://github.com/fdmazzone/shootingMDE}{https://github.com/fdmazzone/shootingMDE}). It numerically calculates Lebesgue-Stieltjes integrals and solves MDEs using Picard's successive approximation method. The convergence of this last procedure was established in \cite{P.Mazzone}. This is used to obtain the Poincaré mapping $P$.  We plot then the contour lines and desity plots  of $h(x)=\|x-P(x)\|^2$. This type of graph gives us clues about the region where it is convenient to look for a fixed point of $P$, and also, potentially, shows us all these fixed points.     Finally, the fixed point problem  $P(x)=x$ is solved using optimizations  functions of the modulus \texttt{scipy.optimize}.
+The shooting method can be used as an algorithm to numerically solve  periodic problems associated to MDEs. We programmed this algorithm using Python language \footnote{  \href{https://github.com/fdmazzone/shootingMDE}{https://github.com/fdmazzone/shootingMDE}}. It numerically calculates Lebesgue-Stieltjes integrals and solves MDEs using Picard's successive approximation method. The convergence of this last procedure was established in \cite{P.Mazzone}. This is used to obtain the Poincaré mapping $P$.  We then plot the contour lines and density plots  of $h(x)=\|x-P(x)\|^2$. This type of graph gives us clues about the region where it is convenient to look for a fixed point of $P$, and also potentially shows us all these fixed points.     Finally, the fixed point problem  $P(x)=x$ is solved using optimizations  functions of the modulus \texttt{scipy.optimize}.
 
-Successive approximations are perhaps not the most efficient algorithm in order to solve MDEs; our plan is to explore the issue of numerical solutions for MDE in greater depth in a future article.
+Successive approximations are perhaps not the most efficient algorithm in solving MDEs; our plan is to explore the issue of numerical solutions for MDE in greater depth in a future article.
 
 
 
-Returning to the particular problem \eqref{eq:problema A},  we consider two experiments, which are subject to all of the above hypotheses, and therefore our theorem guarantees the existence of periodic solutions. We are interested in finding these solutions numerically and interpreting them in physical terms.
+Returning to the particular problem \eqref{eq:example 2.1},  we consider two experiments that are subject to all of the above hypotheses, and thus our Theorem \ref{th:final} guarantees the existence of periodic solutions. We are interested in finding these solutions numerically and interpreting them in physical terms.
 
 \paragraph{\emph{Experiment 1: damped pendulum}}  
 
 We take $c=2.0$, $D=\{1,\ldots, 5\}$,
-$\mu =\sum_{j=1}^6(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, and, it is not hard to see that, $g$ verifies the inequality $|g|\leq d(x,\partial K)$. In Figure \ref{fig:mapa} the density plot of of $h(x)=\|x-P(x)\|^2$ is drawn.
+$\mu =\sum_{j=1}^5(-1)^j\delta_j$ and $g(t,x)=\max\{1.9-\|x\|,0\}$. Then $M=1$, and it is not hard to see that $g$ verifies the inequality $|g|\leq d(x,\partial K)$. In Figure \ref{fig:mapa} the density plot of $h(x)=\|x-P(x)\|^2$ is drawn.
 
 
  \begin{figure}[h]
  \centering
  \includegraphics[max width=.8\textwidth]{Experimento_numerico/mapa_amort.png}
  % CurvasNivel.png: 640x480 px, 100dpi, 16.26x12.19 cm, bb=0 0 461 346
- \caption{Level sets of $h(x)=\|x-P(x)\|^2$, $c=2.0$, $\mu =\sum_{j=1}^6(-1)^j\delta_j$. }
+ \caption{Level sets of $h(x)=\|x-P(x)\|^2$, $c=2.0$, $\mu =\sum_{j=1}^5(-1)^j\delta_j$. }
  \label{fig:mapa}
 \end{figure}
  
- The density map presumably shows that there are only three periodic solutions. Two of them correspond to the unstable equilibria $x=(\pm\pi,0)$ of the simple pendulum, which continue to be  equilibria of our equation . Note that the stable equilibrium $(0,0)$ of the simple pendulum is no longer an equilibrium of our equation, since the impulsive forces alter its steady state. This is not true for unstable equilibria, since $g=0$ in $\partial K$.
+ The density map presumably shows that there are only three periodic solutions. Two of them correspond to the unstable equilibria $x=(\pm\pi,0)$ of the simple pendulum, which continue to be  equilibria of our equation. Note that the stable equilibrium $(0,0)$ of the simple pendulum is no longer an equilibrium of our equation, since the impulsive forces alter its steady state. This is not true for unstable equilibria, since $g=0$ in $\partial K$.
   A third solution can be seen in the center of the image. Its position $(-0.04,0.85)$ was determined more accurately using the optimization algorithm.
-In the Figure \ref{fig:sol} we plot the corresponding solution. As can be see, in thios case, the mass receives impulses in opposite directions on both sides with respect to the stable equilibrium.
- 
+In Figure \ref{fig:sol}, we plot the corresponding solution. \textcolor{blue}{sAs can be observed, in this case, the mass
+spends most of its motion at negative angles. This is because the initial impulse is negative; if it were positive, the mass would spend most of its time at positive angles.}\todoLS[]{programe la solución y efectivamente si $\mu =\sum_{j=1}^5(-1)^{j+1}\delta_j$ la solución se refleja con respecto al eje $x$.}
 
 
-\begin{figure}[h]
+\begin{figure}[h!]
  \centering
- \includegraphics[max width=.8\textwidth]{Experimento_numerico/solucion_amort.png}
+ \includegraphics[max width=.8\textwidth]{Experimento_numerico/solucion_amort_linda.png}
  % solucion.png: 640x480 px, 100dpi, 16.26x12.19 cm, bb=0 0 461 346
- \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A} with  $c=2.0$, $\mu =\sum_{j=1}^6(-1)^j\delta_j$.}
+ \caption{Graph solution $(\theta,\theta')$    of \eqref{eq:problema A} in the interval $[0,4\pi]$ with  $c=2.0$ and $\mu =\sum_{j=1}^5(-1)^j\delta_j$.}
  \label{fig:sol}\label{fig:sol}
 \end{figure}
 
 
 
-\paragraph{\emph{Experiment 1: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 5\}$ (again) and
-$\mu =0.5\sum_{j=1}^6\delta_j$. The function $g$ is the same that  the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulse forces always have the same direction.
+\paragraph{\emph{Experiment 2: undamped pendulum}}  In this example, we take  $c=0.0$, $D=\{1,\ldots, 5\}$ (again) and
+$\mu =0.5\sum_{j=1}^5\delta_j$. The function $g$ is the same as in the previous example. In this case, we are interested in seeing what a periodic solution looks like when the impulsive forces always act in the same direction. \textcolor{blue}{In Figure \ref{fig:mapa_no_amort} the density plot of  $h(x)=\|x-P(x)\|^2$ is drawn.}
+\textcolor{blue}{The map clearly shows the compact region $K$ and the solutions to the equation $h(x)=0$. 
+The unstable solutions $(\pi,0)$ and $(-\pi,0)$ lie on the border of $K$, where the pendulum behaves like a simple pendulum because the external force $g$ vanishes on the border of $K$. 
+As in the previous example, the stable equilibrium $(0,0)$ of the simple pendulum is no longer an equilibrium of our equation. 
+We observe a solution of $h(x)=0$ inside $K$, at the point $P = (1.338,\, 0.578)$, which corresponds to the periodic solution we were looking for, obtained through an optimization algorithm. 
+Its graph is shown in Figure~\ref{fig:sol_no_amort}.}
 
 
 
@@ -710,21 +669,22 @@ $\mu =0.5\sum_{j=1}^6\delta_j$. The function $g$ is the same that  the previous 
  \centering
  \includegraphics[max width=.8\textwidth]{Experimento_numerico/mapa_no_amort.png}
  % mapa_no_amort.png: 1440x792 px, 100dpi, 36.58x20.12 cm, bb=0 0 1037 570
-  \caption{Level sets of $h(x)=\|x-P(x)\|^2$, $c=0.0$, $\mu =0.5\sum_{j=1}^6\delta_j$. }
+  \caption{Level sets of $h(x)=\|x-P(x)\|^2$, $c=0.0$, $\mu =0.5\sum_{j=1}^5\delta_j$. }
  \label{fig:mapa}
  \label{fig:mapa_no_amort}
 \end{figure}
 
 
-\begin{figure}[h]
+    
+
+\begin{figure}[H]
  \centering
  \includegraphics[max width=.8\textwidth]{Experimento_numerico/solucion_no_amort.png}
  % solucion_no_amort.png: 802x480 px, 100dpi, 20.37x12.19 cm, bb=0 0 577 346
- \caption{Graph solution $(\theta,\theta')$  in in the interval $[0,4\pi]$ of \eqref{eq:problema A} with  $c=0.0$, $\mu =0.5\sum_{j=1}^6\delta_j$..}
+ \caption{Graph solution  $(\theta,\theta')$   of \eqref{eq:problema A} in  the interval $[0,4\pi]$ with  $c=0.0$ and $\mu =0.5\sum_{j=1}^5\delta_j$.}
  \label{fig:sol_no_amort}
 \end{figure}
-
-
+ 
 
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
